@@ -8,8 +8,7 @@ const DoctorModel = new Schema({
     lastName: String,
     email: String,
     medicalCenter: String,
-    password: String,
-    lists: [Schema.Types.Mixed]
+    password: String
 });
 
 module.exports = mongoose.model('Doctor', DoctorModel);

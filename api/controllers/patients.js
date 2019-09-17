@@ -3,7 +3,7 @@
 const Patient = require("./../models/patients");
 const bcrypt = require("bcrypt");
 //const jwt = require('jsonwebtoken');
-
+//Muestra todos los pacientes guardados en la bd
 exports.all = (req, res, next) => {
             Patient.find()
             .then( patients => {
@@ -24,7 +24,7 @@ exports.validate = (req, res, next) => {
     }
     });
 }*/
-
+//Recibe un JSON con toda la info del paciente y lo guarda en la bd
 exports.post = (req, res, next) => {
     const patient = req.body;
     const saltRounds = 10;
@@ -38,7 +38,37 @@ exports.post = (req, res, next) => {
      });
     });
 };
+//Recibe un JSON con el id del doctor, devuelve JSONs con los pacientes asociados a este
+exports.findpatients = (req, res, next) => { 
+    const user2 = req.body;
+    const doctor= user2["doc"];
+    Patient.find({ 'doc': doctor })
+    .then( patients => {
+        res.json(patients);
+    })
+    .catch( err => {
+        next(new Error(err));
+    });
+  
+};
+
+
 /*
+exports.addPatient = (req, res, next) => {
+    const id = req.params.idCategory;
+    const patient = req.body;
+    Categories.findOne({ '_id': id }, "products" , function (err, category) {
+        const prods = category.products;
+        prods.push(patient);
+         Categories.updateOne({ "_id": id }, { "products": prods }, function (err) {
+         if(err){
+            console.log(err);
+        }
+        res.json({"status": "OK"});
+    });  
+    })
+};
+
 exports.get = (req, res, next) => {
     const email = req.params.email;
     Patient.findOne({ 'email': email }, function (err, user) {

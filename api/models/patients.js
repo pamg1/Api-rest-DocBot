@@ -18,7 +18,11 @@ const PatientModel = new Schema({
         type: Date,
         default: Date.now
     },
-    medicalCenter: String
+    medicalCenter: String,
+    doc: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Doctor'
+    }
 });
 
 module.exports = mongoose.model('Patient', PatientModel);

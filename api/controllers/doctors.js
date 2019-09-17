@@ -48,7 +48,11 @@ exports.login = (req, res, next) => {
         }else{
             bcrypt.compare(password, user.password, function(err, resu) {
                 if(resu==true){
-                    res.json({"login" : true});
+                    res.json({"login" : true,
+                    "name" : user.name,
+                    "lastName" : user.lastName,
+                    "medicalCenter" : user.medicalCenter
+                });
                 }else{
                     res.json({"login" : false})
                 }
@@ -56,6 +60,7 @@ exports.login = (req, res, next) => {
         }
     });
 };
+
 /*
 exports.get = (req, res, next) => {
     

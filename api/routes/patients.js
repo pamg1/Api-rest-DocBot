@@ -7,6 +7,10 @@ router.route("/")
     .get(controller.all)
     .post(controller.post);
     //.put(controller.validate,controller.put);
+
+router.route("/buscar")
+    .get(controller.findpatients)    
+
 /*
 router.route("/login")
     .post(controller.login);
