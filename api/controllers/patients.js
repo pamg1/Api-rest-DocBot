@@ -56,6 +56,11 @@ exports.findpatients = (req, res, next) => {
 
 
 
+
+
+
+
+
 /*
 exports.addPatient = (req, res, next) => {
     const id = req.params.idCategory;
