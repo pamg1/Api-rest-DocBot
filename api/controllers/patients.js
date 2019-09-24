@@ -51,6 +51,31 @@ exports.findpatients = (req, res, next) => {
     });
   
 };
+//login pacientes
+exports.login = (req, res, next) => { 
+    const user2 = req.body;
+    const email = user2["documentNumber"];
+    const password = user2["password"];
+    Patient.findOne({ 'documentNumber': email }, ['name','lastName','medicalCenter','password'] , function (err, user) {
+        if(user==null){
+            res.json({"login": false});
+        }else{
+            bcrypt.compare(password, user.password, function(err, resu) {
+                if(resu==true){
+                    res.json({"login" : true,
+                    "name" : user.name,
+                    "lastName" : user.lastName,
+                    "medicalCenter" : user.medicalCenter,
+                    "id": user.id
+                });
+                }else{
+                    res.json({"login" : false})
+                }
+            });
+        }
+    });
+  
+};
 
 
 
@@ -96,29 +121,7 @@ exports.email = (req, res, next) => {
     });
 };
 
-exports.login = (req, res, next) => { 
-    const user2 = req.body;
-    const email = user2["email"];
-    const password = user2["password"];
-    Patient.findOne({ 'email': email }, ['password','admin'] , function (err, user) {
-        if(user==null){
-            res.json({"login": false});
-        }else{
-            bcrypt.compare(password, user.password, function(err, resu) {
-                if(resu==true){
-                    if(user.admin==true){
-                        res.json({"login" : true, "token" : jwt.sign({ 'email': email }, 'secret', { algorithm: 'HS384'}, { expiresIn: 60 * 60 }), "admin": true}); 
-                    }else{
-                        res.json({"login" : true, "token" : jwt.sign({ 'email': email },'shhhhh'),"admin": false});      
-                    }
-                }else{
-                    res.json({"login" : false})
-                }
-            });
-        }
-    });
-  
-};
+
 
 exports.put = (req, res, next) => {
     const updates = req.body;

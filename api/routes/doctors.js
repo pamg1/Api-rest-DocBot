@@ -11,5 +11,4 @@ router.route("/")
 router.route("/login")
     .post(controller.login);
 
-
 module.exports = router;

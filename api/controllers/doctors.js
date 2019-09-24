@@ -42,13 +42,14 @@ exports.login = (req, res, next) => {
     const user2 = req.body;
     const email = user2["email"];
     const password = user2["password"];
-    Doctors.findOne({ 'email': email }, ['password'] , function (err, user) {
+    Doctors.findOne({ 'email': email }, ['name','lastName','medicalCenter','password'] , function (err, user) {
         if(user==null){
             res.json({"login": false});
         }else{
             bcrypt.compare(password, user.password, function(err, resu) {
                 if(resu==true){
                     res.json({"login" : true,
+                    "id": user.id,
                     "name" : user.name,
                     "lastName" : user.lastName,
                     "medicalCenter" : user.medicalCenter
@@ -60,7 +61,7 @@ exports.login = (req, res, next) => {
         }
     });
 };
-
+ 
 /*
 exports.get = (req, res, next) => {
     

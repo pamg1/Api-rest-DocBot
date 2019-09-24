@@ -11,6 +11,8 @@ router.route("/")
 router.route("/buscar")
     .get(controller.findpatients)    
 
+router.route("/login")
+    .post(controller.login);
 /*
 router.route("/login")
     .post(controller.login);
