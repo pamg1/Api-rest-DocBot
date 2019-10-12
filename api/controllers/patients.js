@@ -56,7 +56,7 @@ exports.login = (req, res, next) => {
     const user2 = req.body;
     const email = user2["documentNumber"];
     const password = user2["password"];
-    Patient.findOne({ 'documentNumber': email }, ['name','lastName','medicalCenter','password'] , function (err, user) {
+    Patient.findOne({ 'documentNumber': email }, ['name','lastName','age','weight','height','medicalCenter','password'] , function (err, user) {
         if(user==null){
             res.json({"login": false});
         }else{
@@ -66,6 +66,9 @@ exports.login = (req, res, next) => {
                     "name" : user.name,
                     "lastName" : user.lastName,
                     "medicalCenter" : user.medicalCenter,
+                    "age": user.age,
+                    "weight":user.weight,
+                    "height":user.height,
                     "id": user.id
                 });
                 }else{

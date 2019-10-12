@@ -7,6 +7,7 @@ const PatientModel = new Schema({
     name: String,
     lastName: String,
     birthdate: String,
+    age:String,
     documentType: String,
     documentNumber: String,
     weight: String,
