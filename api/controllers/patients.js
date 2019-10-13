@@ -79,8 +79,26 @@ exports.login = (req, res, next) => {
     });
   
 };
-
-
+//actualizar datos del paciente
+exports.put = (req, res, next) => {
+    const updates = req.body;
+    const email = updates["email"];
+    Patient.updateOne({ 'email': email }, { 'name': updates["name"], 'profileImage':updates["profileImage"], 'address': updates["address"] }, function (err, user) {
+        if(err){
+            console.log(err);
+        }
+    });
+    res.json({"update": "OK"});
+};
+/*
+exports.delete = (req, res, next) => {
+    Patient.deleteMany({ 'email': 'vacilalorumbero' }, function (err) {
+        if(err){
+            console.log(err)
+        }
+        res.json({"You":"Are a devil"});
+    });
+};*/
 
 
 

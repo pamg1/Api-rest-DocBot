@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 mongoose.connect('mongodb+srv://clus_admin:lunallena@cluster0-m4c2l.mongodb.net/Botic?retryWrites=true&w=majority',()=>{
-    console.log("Conectado a la base de dato :3")
+    console.log("Conectado a la base de dato")
 });
 
 const api = require("./api/");
