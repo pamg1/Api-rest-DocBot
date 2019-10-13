@@ -3,7 +3,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const MessageModel = new Schema({
+const MessageHistoryModel = new Schema({
     description: String,
     typeMessage: String,
     date: String,
@@ -13,4 +13,4 @@ const MessageModel = new Schema({
     }
 });
 
-module.exports = mongoose.model('Message', MessageModel);
+module.exports = mongoose.model('Message', MessageHistoryModel);
