@@ -63,13 +63,13 @@ exports.login = (req, res, next) => {
             bcrypt.compare(password, user.password, function(err, resu) {
                 if(resu==true){
                     res.json({"login" : true,
+                    "id": user.id,
                     "name" : user.name,
                     "lastName" : user.lastName,
-                    "medicalCenter" : user.medicalCenter,
                     "age": user.age,
                     "weight":user.weight,
                     "height":user.height,
-                    "id": user.id
+                    "medicalCenter" : user.medicalCenter
                 });
                 }else{
                     res.json({"login" : false})

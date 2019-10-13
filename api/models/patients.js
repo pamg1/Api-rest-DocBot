@@ -23,7 +23,8 @@ const PatientModel = new Schema({
     doc: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Doctor'
-    }
+    },
+    img: { data: Buffer, contentType: String }
 });
 
 module.exports = mongoose.model('Patient', PatientModel);
