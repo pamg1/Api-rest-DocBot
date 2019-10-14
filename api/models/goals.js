@@ -6,7 +6,10 @@ const Schema = mongoose.Schema;
 const GoalModel = new Schema({
     description: String,
     state: String,
-    creationDate: String,
+    creationDate: { 
+        type: Date,
+        default: Date.now
+    },
     quantity:String,
     typeFrequency: String,
     frequency: String,
@@ -15,7 +18,8 @@ const GoalModel = new Schema({
     pat: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Patient'
-    }
+    },
+    progress: String
 });
 
 module.exports = mongoose.model('Goal', GoalModel);
