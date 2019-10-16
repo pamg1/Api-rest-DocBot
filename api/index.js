@@ -32,7 +32,7 @@ router.use("/medicalInfos", medicalInfosRoutes);
 const paraclinicalsRoutes = require("./routes/paraclinicals");
 router.use("/paraclinicals", paraclinicalsRoutes);
 
-const bayesianModelRoutes = require("./routes/paraclinicals");
-router.use("/paraclinicals", bayesianModelRoutes);
+const bayesianModelRoutes = require("./routes/bayesianModel");
+router.use("/bayesianModel", bayesianModelRoutes);
 
 module.exports = router;
