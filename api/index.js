@@ -23,13 +23,16 @@ router.use("/appointments", appointmentsRoutes);
 const messagesRoutes = require("./routes/messages");
 router.use("/messages", messagesRoutes);
 
-//const messagesHistoriesRoutes = require("./routes/messagesHistories");
-//router.use("/messagesHistories", goalsHistoriesRoutes);
+const messagesHistoriesRoutes = require("./routes/messagesHistories");
+router.use("/messagesHistories", messagesHistoriesRoutes);
 
 const medicalInfosRoutes = require("./routes/medicalInfos");
 router.use("/medicalInfos", medicalInfosRoutes);
 
 const paraclinicalsRoutes = require("./routes/paraclinicals");
 router.use("/paraclinicals", paraclinicalsRoutes);
+
+const bayesianModelRoutes = require("./routes/paraclinicals");
+router.use("/paraclinicals", bayesianModelRoutes);
 
 module.exports = router;
