@@ -9,7 +9,7 @@ router.route("/")
     //.put(controller.validate,controller.put);
 
 router.route("/buscar")
-    .post(controller.findpatients)    
+    .post(controller.findpatients);    
 
 router.route("/login")
     .post(controller.login);

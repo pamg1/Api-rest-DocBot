@@ -83,7 +83,7 @@ exports.login = (req, res, next) => {
 exports.put = (req, res, next) => {
     const updates = req.body;
     const email = updates["email"];
-    Patient.updateOne({ 'email': email }, { 'name': updates["name"], 'profileImage':updates["profileImage"], 'address': updates["address"] }, function (err, user) {
+    Patient.updateOne({ 'email': email }, { 'name': updates["name"], 'profileImage':updates["profileImage"], 'address': updates["address"] }, function (err, patient) {
         if(err){
             console.log(err);
         }
