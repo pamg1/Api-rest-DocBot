@@ -4,8 +4,8 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const BayesianModel = new Schema({
-    r: int,
-    s: int,
+    r: Number,
+    s: Number,
     patient: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'patient'
