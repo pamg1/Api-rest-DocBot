@@ -8,7 +8,11 @@ const ParaclinicalModel = new Schema({
     type: String,
     value: String,
     comment:String,
-    file: String
+    file: String,
+    patient: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Patient'
+    }
 });
 
 module.exports = mongoose.model('Paraclinical', ParaclinicalModel);

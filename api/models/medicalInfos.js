@@ -4,12 +4,12 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const MedicalInfoModel = new Schema({
-    weight: String,
+    weight: [],
     height: String,
     clinicalContext: String,
     testFindRisk:String,
     medicalCenter: String,
-    eps: String,
+    eps: String/*,
     goals:  { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'goals'
@@ -25,7 +25,7 @@ const MedicalInfoModel = new Schema({
     appointments: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'appoinments'
-    }
+    }*/
 });
 
 module.exports = mongoose.model('MedicalInfo', MedicalInfoModel);
