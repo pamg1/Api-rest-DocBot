@@ -86,7 +86,7 @@ exports.put = (req, res, next) => {
     Patient.updateOne({ '_id': id }, { 'name': updates["name"], 'lastName':updates["lastName"], 'birthdate': updates["birthdate"],
      'documentType': updates["documentType"], 'documentNumber':updates["documentNumber"], 'age': updates["age"],
      'weight': updates["weight"], 'height':updates["height"], 'sex': updates["sex"],
-     'medicalCenter': updates["medicalCenter"],'__v': updates["__v"]}, function (err, patient) {
+     'medicalCenter': updates["medicalCenter"]}, function (err, patient) {
         if(err){
             console.log(err);
         }
