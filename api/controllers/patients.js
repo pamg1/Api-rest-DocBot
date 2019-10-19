@@ -112,13 +112,14 @@ exports.sendEmail = (req, res, next) => {
         subject: 'Recovery password', // Subject line
         html: '<p>Password :v</p>'// plain text body
     };
+    
+    console.log(patient["email"]);
     transporter.sendMail(mailOptions, function (err, info) {
         if(err)
           console.log(err)
         else
           console.log(info);
     });
-    console.log(patient["email"]);
     res.json({"Send email": "OK"});
 };
 
