@@ -118,6 +118,7 @@ exports.sendEmail = (req, res, next) => {
         else
           console.log(info);
     });
+    console.log(patient["email"]);
     res.json({"Send email": "OK"});
 };
 
