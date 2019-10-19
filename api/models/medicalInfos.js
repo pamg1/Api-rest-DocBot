@@ -4,8 +4,6 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const MedicalInfoModel = new Schema({
-    weight: [],
-    height: String,
     clinicalContext: String,
     testFindRisk:String,
     medicalCenter: String,

@@ -82,8 +82,11 @@ exports.login = (req, res, next) => {
 //actualizar datos del paciente
 exports.put = (req, res, next) => {
     const updates = req.body;
-    const email = updates["email"];
-    Patient.updateOne({ 'email': email }, { 'name': updates["name"], 'profileImage':updates["profileImage"], 'address': updates["address"] }, function (err, patient) {
+    const id = updates["_id"];
+    Patient.updateOne({ '_id': id }, { 'name': updates["name"], 'lastName':updates["lastName"], 'birthdate': updates["birthdate"],
+     'documentType': updates["documentType"], 'documentNumber':updates["documentNumber"], 'age': updates["age"],
+     'weight': updates["weight"], 'height':updates["height"], 'sex': updates["sex"],
+     'medicalCenter': updates["medicalCenter"], '__v':updates["__v"]}, function (err, patient) {
         if(err){
             console.log(err);
         }
