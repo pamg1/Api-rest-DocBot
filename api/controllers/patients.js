@@ -2,6 +2,7 @@
 
 const Patient = require("./../models/patients");
 const bcrypt = require("bcrypt");
+const nodemailer = require('nodemailer')
 //const jwt = require('jsonwebtoken');
 //Muestra todos los pacientes guardados en la bd
 exports.all = (req, res, next) => {
@@ -93,6 +94,33 @@ exports.put = (req, res, next) => {
     });
     res.json({"update": "OK"});
 };
+
+//
+exports.sendEmail = (req, res, next) => {
+    const patient = req.body;
+    // create reusable transporter object using the default SMTP transport
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+               user: 'pamg0107@gmail.com',
+               pass: 'juanagonzalez'
+        }
+    });
+    const mailOptions = {
+        from: 'pamg0107@gmail.com', // sender address
+        to: patient["email"], // list of receivers
+        subject: 'Recovery password', // Subject line
+        html: '<p>Password :v</p>'// plain text body
+    };
+    transporter.sendMail(mailOptions, function (err, info) {
+        if(err)
+          console.log(err)
+        else
+          console.log(info);
+    });
+    res.json({"Send email": "OK"});
+};
+
 /*
 exports.delete = (req, res, next) => {
     Patient.deleteMany({ 'email': 'vacilalorumbero' }, function (err) {

@@ -13,10 +13,10 @@ router.route("/buscar")
 
 router.route("/login")
     .post(controller.login);
+    
+router.route("/sendemail")
+    .get(controller.sendEmail);
 /*
-router.route("/login")
-    .post(controller.login);
-
 router.route("/:email")
     .get(controller.validate,controller.get);
     
