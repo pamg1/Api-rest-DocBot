@@ -38,6 +38,29 @@ exports.post = (req, res, next) => {
             res.json(patient);
      });
     });
+    // create reusable transporter object using the default SMTP transport
+     var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+               user: 'docbotadmon@gmail.com',
+               pass: 'f5J~w5Q]=1JDj'
+        }
+    });
+    const mailOptions = {
+        from: 'docbotadmon@gmail.com', // sender address
+        to: patient["email"], // list of receivers
+        subject: 'Bienvenido a DocBot', // Subject line
+        html: '<h2>Bienvenido a DocBot!</h2><p>Su cuenta ha sido creada exitosamente<br/><b>Nombre de usuario:'+patient[documentNumber]+'</b><br/><b>Contraseña:</b>'+patient[password]+'</p>'// plain text body
+    };
+    
+    console.log(patient["email"]);
+    transporter.sendMail(mailOptions, function (err, info) {
+        if(err)
+          console.log(err)
+        else
+          console.log(info);
+    });
+    res.json({"Send email": "OK"});
 };
 //Recibe un JSON con el id del doctor, devuelve JSONs con los pacientes asociados a este
 exports.findpatients = (req, res, next) => { 
@@ -102,15 +125,15 @@ exports.sendEmail = (req, res, next) => {
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-               user: 'pamg0107@gmail.com',
-               pass: 'juanagonzalez'
+               user: 'docbotadmon@gmail.com',
+               pass: 'f5J~w5Q]=1JDj'
         }
     });
     const mailOptions = {
-        from: 'pamg0107@gmail.com', // sender address
+        from: 'docbotadmon@gmail.com', // sender address
         to: patient["email"], // list of receivers
-        subject: 'Recovery password', // Subject line
-        html: '<p>Password :v</p>'// plain text body
+        subject: 'Bienvenido a DocBot', // Subject line
+        html: '<h2>Bienvenido a DocBot!</h2><p>Su cuenta ha sido creada exitosamente<br/><b>Nombre de usuario:</b><br/><b>Contraseña:</b></p>'// plain text body
     };
     
     console.log(patient["email"]);
