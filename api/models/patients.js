@@ -11,6 +11,8 @@ const PatientModel = new Schema({
     documentType: String,
     documentNumber: String,
     sex: String,
+    weight: [],
+    height: String,
     email: String,
     password: String,
     clinicalContext: String,
