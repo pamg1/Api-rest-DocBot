@@ -29,17 +29,8 @@ exports.validate = (req, res, next) => {
 exports.post = (req, res, next) => {
     const patient = req.body;
     const saltRounds = 10;
-    bcrypt.genSalt(saltRounds, function(err, salt) {
-    bcrypt.hash(patient["password"], salt, function(err, hash) {
-            patient["password"] = hash;
-            new Patient(patient).save(err=>{
-               console.log(err);
-            });
-            res.json(patient);
-     });
-    });
     // create reusable transporter object using the default SMTP transport
-     var transporter = nodemailer.createTransport({
+    var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
                user: 'docbotadmon@gmail.com',
@@ -52,7 +43,6 @@ exports.post = (req, res, next) => {
         subject: 'Bienvenido a DocBot', // Subject line
         html: '<h2>Bienvenido a DocBot!</h2><p>Su cuenta ha sido creada exitosamente<br/><b>Nombre de usuario:'+patient[documentNumber]+'</b><br/><b>Contraseña:</b>'+patient[password]+'</p>'// plain text body
     };
-    
     console.log(patient["email"]);
     transporter.sendMail(mailOptions, function (err, info) {
         if(err)
@@ -60,7 +50,15 @@ exports.post = (req, res, next) => {
         else
           console.log(info);
     });
-    res.json({"Send email": "OK"});
+    bcrypt.genSalt(saltRounds, function(err, salt) {
+    bcrypt.hash(patient["password"], salt, function(err, hash) {
+            patient["password"] = hash;
+            new Patient(patient).save(err=>{
+               console.log(err);
+            });
+            res.json(patient);
+     });
+    });
 };
 //Recibe un JSON con el id del doctor, devuelve JSONs con los pacientes asociados a este
 exports.findpatients = (req, res, next) => { 
