@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const ParaclinicalModel = new Schema({
-    date: String,
+    
     type: String,
     value: String,
     comment:String,
@@ -12,6 +12,10 @@ const ParaclinicalModel = new Schema({
     patient: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Patient'
+    },
+    date: { 
+        type: Date,
+        default: Date.now
     }
 });
 
