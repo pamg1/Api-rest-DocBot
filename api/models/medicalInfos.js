@@ -7,7 +7,11 @@ const MedicalInfoModel = new Schema({
     clinicalContext: String,
     testFindRisk:String,
     medicalCenter: String,
-    eps: String/*,
+    eps: String,
+    patient: {
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Patient'
+    }/*,
     goals:  { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'goals'
