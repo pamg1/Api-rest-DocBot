@@ -21,10 +21,18 @@ exports.post = (req, res, next) => {
     
 };
 //Recibe un JSON con el id del paciente, devuelve JSONs con la info medica asociada a este
+exports.findTestFR = (req, res, next) => { 
+    const user2 = req.headers;
+    const patient= user2["patient"];
+    MedicalInfo.findOne({ 'patient': patient },['testFindRisk'],function (err, user){
+        res.json({"testfindRisk" : user.testfindRisk})
+    });
+};
+//Recibe un JSON con el id del paciente, devuelve JSONs con la info medica asociada a este
 exports.findmedicalinfo = (req, res, next) => { 
     const user2 = req.body;
-    const patient= user2["pat"];
-    MedicalInfo.find({ 'pat': patient })
+    const patient= user2["patient"];
+    MedicalInfo.find({ 'patient': patient })
     .then( goals => {
         res.json(goals);
     })

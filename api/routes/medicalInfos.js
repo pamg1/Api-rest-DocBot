@@ -11,4 +11,6 @@ router.route("/")
 router.route("/buscar")
     .post(controller.findmedicalinfo)  
 
+router.route("/findTestfr")
+    .get(controller.findTestFR)  
 module.exports = router;
