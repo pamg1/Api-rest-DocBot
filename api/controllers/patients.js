@@ -62,7 +62,7 @@ exports.post = (req, res, next) => {
 };
 //Recibe un JSON con el id del doctor, devuelve JSONs con los pacientes asociados a este
 exports.findpatients = (req, res, next) => { 
-    const user2 = req.params;
+    const user2 = req.headers;
     const doctor= user2["content-Type"];
     console.log(user2);
     console.log(doctor);
