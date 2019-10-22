@@ -107,11 +107,7 @@ exports.login = (req, res, next) => {
 exports.put = (req, res, next) => {
     const updates = req.body;
     const id = updates["_id"];
-    Patient.updateOne({ '_id': id }, {$push:{'weight': 100 },'name': updates["name"],
-     'lastName':updates["lastName"], 'birthdate': updates["birthdate"],
-     'documentType': updates["documentType"], 'documentNumber':updates["documentNumber"], 'age': updates["age"],
-     'height':updates["height"], 'sex': updates["sex"],
-     'medicalCenter': updates["medicalCenter"]}, function (err, patient) {
+    Patient.updateOne({ '_id': id }, {$push:{'weight': updates["weight"]}}, function (err, patient) {
         if(err){
             console.log(err);
         }
