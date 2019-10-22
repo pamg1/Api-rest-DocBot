@@ -33,3 +33,17 @@ exports.findparaclinicals = (req, res, next) => {
     });
   
 };
+//Recibe el id de un paciente y el tipo de paraclinico, devuelve JSONs con los paraclinicos asociados a este
+exports.findparaclinicalsbypandt = (req, res, next) => { 
+    const user2 = req.body;
+    const patient= user2['patient'];
+    const type= user2['type'];
+    Paraclinical.find({ 'patient': patient, 'type': type })
+    .then( paraclinicals => {
+        res.json(paraclinicals);
+    })
+    .catch( err => {
+        next(new Error(err));
+    });
+  
+};
