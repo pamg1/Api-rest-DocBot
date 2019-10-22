@@ -24,6 +24,8 @@ exports.post = (req, res, next) => {
 exports.findTestFR = (req, res, next) => { 
     const user2 = req.headers;
     const patient= user2["patient"];
+    console.log(user2);
+    console.log(patient);
     MedicalInfo.findOne({ 'patient': patient },['testFindRisk'],function (err, user){
         res.json({"testfindRisk" : user.testfindRisk})
     });
