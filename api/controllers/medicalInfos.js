@@ -31,7 +31,7 @@ exports.findTestFR = (req, res, next) => {
             res.json({"status" : "El paciente no ha realizado el test"})
         }else{
             console.log(user.testFindRisk);
-            res.json({"testfindRisk" : user.testFindRisk})
+            res.json({"testFindRisk" : user.testFindRisk})
         }
     });
 };
