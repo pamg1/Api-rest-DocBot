@@ -27,10 +27,10 @@ exports.findTestFR = (req, res, next) => {
     console.log(user2);
     console.log(patient);
     MedicalInfo.findOne({ 'patient': patient },['testFindRisk'],function (err, user){
-        console.log(user.testFindRisk);
         if(user == null){
             res.json({"status" : "El paciente no ha realizado el test"})
         }else{
+            console.log(user.testFindRisk);
             res.json({"testfindRisk" : user.testFindRisk})
         }
     });
