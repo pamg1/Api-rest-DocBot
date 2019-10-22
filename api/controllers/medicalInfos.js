@@ -24,8 +24,6 @@ exports.post = (req, res, next) => {
 exports.findTestFR = (req, res, next) => { 
     const user2 = req.headers;
     const patient= user2["patient"];
-    console.log(user2);
-    console.log(patient);
     MedicalInfo.findOne({ 'patient': patient },['testFindRisk'],function (err, user){
         if(user == null){
             res.json({"status" : "El paciente no ha realizado el test"})
