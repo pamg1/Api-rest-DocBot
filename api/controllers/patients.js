@@ -64,7 +64,7 @@ exports.post = (req, res, next) => {
 exports.findpatients = (req, res, next) => { 
     const user2 = req.params;
     const doctor= user2[0];
-    console.log(doctor);
+    console.log(user2);
     Patient.find({ 'doc': doctor })
     .then( patients => {
         res.json(patients);
