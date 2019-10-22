@@ -27,6 +27,7 @@ exports.findTestFR = (req, res, next) => {
     console.log(user2);
     console.log(patient);
     MedicalInfo.findOne({ 'patient': patient },['testFindRisk'],function (err, user){
+        console.log(user.testfindRisk);
         res.json({"testfindRisk" : user.testfindRisk})
     });
 };
