@@ -78,7 +78,7 @@ exports.login = (req, res, next) => {
     const user2 = req.body;
     const email = user2["documentNumber"];
     const password = user2["password"];
-    Patient.findOne({ 'documentNumber': email }, ['name','lastName','age','weight','height','medicalCenter','password', 'avatar', 'sex'] , function (err, user) {
+    Patient.findOne({ 'documentNumber': email }, ['name','lastName','age','weight','height','medicalCenter','password', 'avatar', 'sex', 'email'] , function (err, user) {
         if(user==null){
             res.json({"login": false});
         }else{
@@ -93,7 +93,8 @@ exports.login = (req, res, next) => {
                     "height":user.height,
                     "medicalCenter" : user.medicalCenter,
                     "avatar": user.avatar,
-                    "sex": user.sex
+                    "sex": user.sex,
+                    "email": user.email
                 });
                 }else{
                     res.json({"login" : false})
@@ -111,7 +112,7 @@ exports.put = (req, res, next) => {
      'lastName':updates["lastName"], 'birthdate': updates["birthdate"],
      'documentType': updates["documentType"], 'documentNumber':updates["documentNumber"], 'age': updates["age"],
      'height':updates["height"], 'sex': updates["sex"],
-     'medicalCenter': updates["medicalCenter"]}, function (err, patient) {
+     'medicalCenter': updates["medicalCenter"], 'email': updates["email"]}, function (err, patient) {
         if(err){
             console.log(err);
         }
