@@ -9,6 +9,6 @@ router.route("/")
     //.put(controller.validate,controller.put);
 
 router.route("/buscar")
-    .post(controller.findparaclinicals)  
+    .get(controller.findparaclinicals)  
 
 module.exports = router;
