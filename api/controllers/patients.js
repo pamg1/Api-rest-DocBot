@@ -153,6 +153,8 @@ exports.sendEmail = (req, res, next) => {
 exports.delete = (req, res, next) => {
     const patient = req.headers;
     const id= patient["id"];
+    console.log(patient);
+    console.log(id);
     MedicalInfo.deleteMany({'patient': id }, function (err) {
         if(err){
             console.log(err)
