@@ -1,6 +1,8 @@
 "use strict";
 
 const Patient = require("./../models/patients");
+const MedicalInfo = require("./../models/medicalInfos");
+const Paraclinical = require("./../models/paraclinicals");
 const bcrypt = require("bcrypt");
 const nodemailer = require('nodemailer')
 //const jwt = require('jsonwebtoken');
@@ -151,7 +153,17 @@ exports.sendEmail = (req, res, next) => {
 exports.delete = (req, res, next) => {
     const patient = req.headers;
     const id= patient["id"];
-    Patient.deleteMany({ '_id': id }, function (err) {
+    MedicalInfo.deleteMany({'patient': id }, function (err) {
+        if(err){
+            console.log(err)
+        }
+    });
+    Paraclinical.deleteMany({'patient': id }, function (err) {
+        if(err){
+            console.log(err)
+        }
+    });
+    Patient.deleteOne({'_id': id }, function (err) {
         if(err){
             console.log(err)
         }
