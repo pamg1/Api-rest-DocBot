@@ -25,6 +25,7 @@ const PatientModel = new Schema({
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Doctor'
     },
+    avatar: String,
     img: { data: Buffer, contentType: String }
 });
 

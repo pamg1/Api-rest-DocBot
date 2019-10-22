@@ -41,7 +41,7 @@ exports.post = (req, res, next) => {
         from: 'docbotadmon@gmail.com', // sender address
         to: patient["email"], // list of receivers
         subject: 'Bienvenido a DocBot', // Subject line
-        html: '<h2>Bienvenido a DocBot!</h2><p>Su cuenta ha sido creada exitosamente<br/><b>Nombre de usuario:</b>'+patient["documentNumber"]+'<br/><b>Contraseña:</b>'+patient["password"]+'</p>'// plain text body
+        html: '<h2>Bienvenido a DocBot!</h2><p>'+patient["name"]+', su cuenta ha sido creada exitosamente<br/><b>Nombre de usuario:</b>'+patient["documentNumber"]+'<br/><b>Contraseña:</b>'+patient["password"]+'</p>'// plain text body
     };
     console.log(patient["email"]);
     transporter.sendMail(mailOptions, function (err, info) {
@@ -78,7 +78,7 @@ exports.login = (req, res, next) => {
     const user2 = req.body;
     const email = user2["documentNumber"];
     const password = user2["password"];
-    Patient.findOne({ 'documentNumber': email }, ['name','lastName','age','weight','height','medicalCenter','password'] , function (err, user) {
+    Patient.findOne({ 'documentNumber': email }, ['name','lastName','age','weight','height','medicalCenter','password', 'avatar', 'sex'] , function (err, user) {
         if(user==null){
             res.json({"login": false});
         }else{
@@ -91,7 +91,9 @@ exports.login = (req, res, next) => {
                     "age": user.age,
                     "weight":user.weight,
                     "height":user.height,
-                    "medicalCenter" : user.medicalCenter
+                    "medicalCenter" : user.medicalCenter,
+                    "avatar": user.avatar,
+                    "sex": user.sex
                 });
                 }else{
                     res.json({"login" : false})
@@ -107,7 +109,7 @@ exports.put = (req, res, next) => {
     const id = updates["_id"];
     Patient.updateOne({ '_id': id }, { 'name': updates["name"], 'lastName':updates["lastName"], 'birthdate': updates["birthdate"],
      'documentType': updates["documentType"], 'documentNumber':updates["documentNumber"], 'age': updates["age"],
-     'weight': updates["weight"], 'height':updates["height"], 'sex': updates["sex"],
+     $push:{'weight': updates["weight"]}, 'height':updates["height"], 'sex': updates["sex"],
      'medicalCenter': updates["medicalCenter"]}, function (err, patient) {
         if(err){
             console.log(err);
