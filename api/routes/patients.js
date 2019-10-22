@@ -16,6 +16,9 @@ router.route("/login")
     
 router.route("/sendemail")
     .get(controller.sendEmail);
+
+router.route("/delete")
+    .delete(controller.delete);
 /*
 router.route("/:email")
     .get(controller.validate,controller.get);

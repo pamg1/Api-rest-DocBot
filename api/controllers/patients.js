@@ -147,7 +147,17 @@ exports.sendEmail = (req, res, next) => {
     });
     res.json({"Send email": "OK"});
 };
-
+//delete patient
+exports.delete = (req, res, next) => {
+    const patient = req.headers;
+    const id= patient["id"];
+    Patient.deleteMany({ '_id': id }, function (err) {
+        if(err){
+            console.log(err)
+        }
+        res.json({"delete":"ok"});
+    });
+};
 /*
 exports.delete = (req, res, next) => {
     Patient.deleteMany({ 'email': 'vacilalorumbero' }, function (err) {
@@ -157,14 +167,6 @@ exports.delete = (req, res, next) => {
         res.json({"You":"Are a devil"});
     });
 };*/
-
-
-
-
-
-
-
-
 /*
 exports.addPatient = (req, res, next) => {
     const id = req.params.idCategory;
