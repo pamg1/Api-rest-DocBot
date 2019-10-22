@@ -27,6 +27,27 @@ exports.validate = (req, res, next) => {
 exports.post = (req, res, next) => {
     const doctors = req.body;
     const saltRounds = 10;
+    // create reusable transporter object using the default SMTP transport
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+               user: 'docbotadmon@gmail.com',
+               pass: 'f5J~w5Q]=1JDj'
+        }
+    });
+    const mailOptions = {
+        from: 'docbotadmon@gmail.com', // sender address
+        to: doctor["email"], // list of receivers
+        subject: 'Bienvenido a DocBot', // Subject line
+        html: '<h2>Bienvenido a DocBot!</h2><p>'+doctor["name"]+', su cuenta ha sido creada exitosamente<br/><b>Nombre de usuario:</b>'+doctor["email"]+'<br/><b>Contraseña:</b>'+doctor["password"]+'</p>'// plain text body
+    };
+    console.log(doctor["email"]);
+    transporter.sendMail(mailOptions, function (err, info) {
+        if(err)
+          console.log(err)
+        else
+          console.log(info);
+    });
     bcrypt.genSalt(saltRounds, function(err, salt) {
     bcrypt.hash(doctors["password"], salt, function(err, hash) {
             doctors["password"] = hash;

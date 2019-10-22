@@ -17,7 +17,7 @@ exports.post = (req, res, next) => {
     new Paraclinical(paraclinical).save(err=>{
        console.log(err);
     });
-    res.json(message);
+    res.json(paraclinical);
     
 };
 //Recibe un JSON con el de la meta, devuelve JSONs con las metas asociados a este
