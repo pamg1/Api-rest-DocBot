@@ -23,7 +23,7 @@ exports.post = (req, res, next) => {
 //Recibe un JSON con el de la meta, devuelve JSONs con las metas asociados a este
 exports.findparaclinicals = (req, res, next) => { 
     const user2 = req.headers;
-    const patient= user2['content-Type'];
+    const patient= user2['content-type'];
     console.log(user2);
     console.log(patient);
     Paraclinical.find({ 'patient': patient })
