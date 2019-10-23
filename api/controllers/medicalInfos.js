@@ -55,7 +55,7 @@ exports.put = (req, res, next) => {
         res.json(medicalInfos);
     })
     .catch( err => {
-        next(new Error(err));
+        ext(new Error(err));n
     });
   
 };

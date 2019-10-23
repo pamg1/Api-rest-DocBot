@@ -15,17 +15,6 @@ exports.all = (req, res, next) => {
                 next(new Error(err));
             });
 };
-/*
-exports.validate = (req, res, next) => {
-    const token = req.headers["token"];
-    jwt.verify(token, 'shhhhh', function(err, decoded) {
-        if(err){
-            res.json({"Error": err});
-        }else{
-            next();   
-    }
-    });
-}*/
 //Recibe un JSON con toda la info del paciente y lo guarda en la bd
 exports.post = (req, res, next) => {
     const patient = req.body;
@@ -120,6 +109,30 @@ exports.put = (req, res, next) => {
     });
     res.json({"update": "OK"});
 };
+//actualizar datos del paciente
+exports.putweight = (req, res, next) => {
+    const updates = req.body;
+    const id = updates["_id"];
+    Patient.updateOne({ '_id': id }, {$push:{'weight': updates["weight"]}}, function (err, patient) {
+        if(err){
+            console.log(err);
+        }
+    });
+    res.json({"update": "OK"});
+};
+//Recibe un JSON con el id del doctor, devuelve JSONs con los pacientes asociados a este
+exports.getWeight = (req, res, next) => { 
+    const user2 = req.headers;
+    const id= user2["id"];
+    Patient.findOne({ '_id': id },['weight'],function (err, user) {
+        if(user==null){
+            res.json({"weight":"no asociado a paciente"});
+        }else{
+            res.json({"weight":user.weight});
+        }
+    });
+     
+};
 
 //
 exports.sendEmail = (req, res, next) => {
@@ -171,6 +184,18 @@ exports.delete = (req, res, next) => {
         res.json({"delete":"ok"});
     });
 };
+
+/*
+exports.validate = (req, res, next) => {
+    const token = req.headers["token"];
+    jwt.verify(token, 'shhhhh', function(err, decoded) {
+        if(err){
+            res.json({"Error": err});
+        }else{
+            next();   
+    }
+    });
+}*/
 /*
 exports.delete = (req, res, next) => {
     Patient.deleteMany({ 'email': 'vacilalorumbero' }, function (err) {

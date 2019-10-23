@@ -19,6 +19,7 @@ const GoalModel = new Schema({
     dueDate: Date,
     complianceDate: Date,
     tag: String,
+    nMessages: String,
     pat: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Patient'

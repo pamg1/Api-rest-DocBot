@@ -19,6 +19,9 @@ router.route("/sendemail")
 
 router.route("/delete")
     .delete(controller.delete);
+
+router.route("/udateweight")
+    .delete(controller.putweight);
 /*
 router.route("/:email")
     .get(controller.validate,controller.get);
