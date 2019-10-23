@@ -34,12 +34,12 @@ exports.findgoals = (req, res, next) => {
   
 };
 
-//actualizar datos del paciente
-exports.put = (req, res, next) => {
+//actualizar datos de la meta
+exports.putpat = (req, res, next) => {
     const updates = req.body;
     const id = updates["_id"];
     Patient.updateOne({ '_id': id }, {'progress': updates["progress"],
-     'state':updates["state"], 'duedate': updates["duedate"],
+     'state':updates["state"], 'nMessages': updates["nMessages"],
      'complianceDate': updates["complianceDate"]}, function (err, patient) {
         if(err){
             console.log(err);
