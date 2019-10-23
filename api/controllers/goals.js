@@ -33,3 +33,17 @@ exports.findgoals = (req, res, next) => {
     });
   
 };
+
+//actualizar datos del paciente
+exports.put = (req, res, next) => {
+    const updates = req.body;
+    const id = updates["_id"];
+    Patient.updateOne({ '_id': id }, {'progress': updates["progress"],
+     'state':updates["state"], 'duedate': updates["duedate"],
+     'complianceDate': updates["complianceDate"]}, function (err, patient) {
+        if(err){
+            console.log(err);
+        }
+    });
+    res.json({"update": "OK"});
+};

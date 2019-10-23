@@ -15,11 +15,14 @@ const GoalModel = new Schema({
     frequency: String,
     intensityLevel: String,
     typeMessage: String,
+    progress: String,
+    dueDate: Date,
+    complianceDate: Date,
+    tag: String,
     pat: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Patient'
-    },
-    progress: String
+    }
 });
 
 module.exports = mongoose.model('Goal', GoalModel);

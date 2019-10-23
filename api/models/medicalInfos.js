@@ -8,6 +8,7 @@ const MedicalInfoModel = new Schema({
     testFindRisk:String,
     medicalCenter: String,
     eps: String,
+    isDiabetic: Boolean,
     patient: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Patient'

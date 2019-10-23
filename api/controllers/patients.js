@@ -5,7 +5,6 @@ const MedicalInfo = require("./../models/medicalInfos");
 const Paraclinical = require("./../models/paraclinicals");
 const bcrypt = require("bcrypt");
 const nodemailer = require('nodemailer')
-//const jwt = require('jsonwebtoken');
 //Muestra todos los pacientes guardados en la bd
 exports.all = (req, res, next) => {
             Patient.find()
