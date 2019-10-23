@@ -33,11 +33,11 @@ exports.findgoals = (req, res, next) => {
     });
   
 };
-
 //actualizar datos de la meta
 exports.putpat = (req, res, next) => {
     const updates = req.body;
     const id = updates["_id"];
+    console.log(updates);
     Patient.updateOne({ '_id': id }, {'progress': updates["progress"],
      'state':updates["state"], 'nMessages': updates["nMessages"],
      'complianceDate': updates["complianceDate"]}, function (err, patient) {

@@ -12,42 +12,11 @@ exports.all = (req, res, next) => {
                 next(new Error(err));
             });
 };
-/*
-exports.validate = (req, res, next) => {
-    const token = req.headers["token"];
-    jwt.verify(token,  'secret', { algorithm: 'HS384'}, function(err, decoded) {
-        if(err){
-            res.send({"mensaje": err});
-        }else{
-            next();   
-        }
-    });
-};
-*/
+
 exports.post = (req, res, next) => {
     const doctors = req.body;
     const saltRounds = 10;
-    // create reusable transporter object using the default SMTP transport
-    var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-               user: 'docbotadmon@gmail.com',
-               pass: 'f5J~w5Q]=1JDj'
-        }
-    });
-    const mailOptions = {
-        from: 'docbotadmon@gmail.com', // sender address
-        to: doctor["email"], // list of receivers
-        subject: 'Bienvenido a DocBot', // Subject line
-        html: '<h2>Bienvenido a DocBot!</h2><p>'+doctor["name"]+', su cuenta ha sido creada exitosamente<br/><b>Nombre de usuario:</b>'+doctor["email"]+'<br/><b>Contraseña:</b>'+doctor["password"]+'</p>'// plain text body
-    };
-    console.log(doctor["email"]);
-    transporter.sendMail(mailOptions, function (err, info) {
-        if(err)
-          console.log(err)
-        else
-          console.log(info);
-    });
+    exports.sendEmail(req);
     bcrypt.genSalt(saltRounds, function(err, salt) {
     bcrypt.hash(doctors["password"], salt, function(err, hash) {
             doctors["password"] = hash;
@@ -82,63 +51,40 @@ exports.login = (req, res, next) => {
         }
     });
 };
- 
+
+exports.sendEmail = (req) => {
+    const doctor = req.body;
+    // create reusable transporter object using the default SMTP transport
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+               user: 'docbotadmon@gmail.com',
+               pass: 'f5J~w5Q]=1JDj'
+        }
+    });
+    const mailOptions = {
+        from: 'docbotadmon@gmail.com', // sender address
+        to: doctor["email"], // list of receivers
+        subject: 'Bienvenido a DocBot', // Subject line
+        html: '<h2>Bienvenido a DocBot!</h2><p>'+doctor["name"]+', su cuenta ha sido creada exitosamente<br/><b>Nombre de usuario: </b>'+doctor["email"]+'<br/><b>Contraseña: </b>'+doctor["password"]+'</p>'// plain text body
+    };
+    console.log(doctor["email"]);
+    transporter.sendMail(mailOptions, function (err, info) {
+        if(err)
+          console.log(err)
+        else
+          console.log(info);
+    });
+}
 /*
-exports.get = (req, res, next) => {
-    
-};
-
-exports.put = (req, res, next) => {
-    
-};
-
-exports.prods = (req, res, next) => {
-    const id = req.params.idCategory;
-     Categories.findOne({ '_id': id }, "products" , function (err, category) {
-             res.json(category.products);
-     })
-};
-
-
-exports.addprod = (req, res, next) => {
-    const id = req.params.idCategory;
-    const product = req.body;
-    Categories.findOne({ '_id': id }, "products" , function (err, category) {
-        const prods = category.products;
-        prods.push(product);
-         Categories.updateOne({ "_id": id }, { "products": prods }, function (err) {
-         if(err){
-            console.log(err);
-        }
-        res.json({"status": "OK"});
-    });  
-    })
-};
-
-exports.removeprod = (req, res, next) => {
-    const id = req.params.idCategory;
-    const product = req.body;
-    Categories.findOne({ '_id': id }, "products" , function (err, category) {
-        const prods = category.products;
-        const new_prods =  prods.filter(function(prod){
-            return prod.name != product.name;
-        });
-        Categories.updateOne({ "_id": id }, { "products": new_prods }, function (err) {
-         if(err){
-            console.log(err);
-        }
-        res.json({"status": "OK"});
-    });  
-    });
-};
-
-
-exports.delete = (req, res, next) => {
-    const name = req.body["name"];
-    Categories.deleteOne({ 'name': name }, function (err) {
+exports.validate = (req, res, next) => {
+    const token = req.headers["token"];
+    jwt.verify(token,  'secret', { algorithm: 'HS384'}, function(err, decoded) {
         if(err){
-            console.log(err);
+            res.send({"mensaje": err});
+        }else{
+            next();   
         }
-        res.json({"status": "OK"})
     });
-};*/
+};
+*/
