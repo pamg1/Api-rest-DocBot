@@ -110,7 +110,7 @@ exports.putweight = (req, res, next) => {
     const updates = req.body;
     const id = updates["id"];
     console.log(updates);
-    Patient.updateOne({ '_id': id }, {$push:{'weight': updates["value"], 'date': Date.now}}, function (err, patient) {
+    Patient.updateOne({ '_id': id }, {$push:{'weight': updates["value"]}}, function (err, patient) {
         if(err){
             console.log(err);
         }
