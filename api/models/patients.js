@@ -13,10 +13,7 @@ const PatientModel = new Schema({
     sex: String,
     weight: { 
         value: Number, 
-        date: {
-            type: Date,
-            default: Date.now
-        }
+        date: Date
     },
     height: String,
     email: String,
