@@ -95,11 +95,12 @@ exports.put = (req, res, next) => {
 exports.putpat = (req, res, next) => {
     const updates = req.body;
     const id = updates["id"];
+    console.log(updates);
     Patient.updateOne({ '_id': id }, {$push:{'weight': updates["weight"]},'name': updates["name"],
      'lastName':updates["lastName"], 'age': updates["age"],
      'height':updates["height"],'avatar':updates["avatar"]}, function (err, patient) {
         if(err){
-            console.log(err);
+            console.log("Error: "+err);
         }
     });
     res.json({"update": "OK"});
