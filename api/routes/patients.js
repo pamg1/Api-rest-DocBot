@@ -23,6 +23,9 @@ router.route("/delete")
 router.route("/updateweight")
     .put(controller.putweight);
 
+router.route("/getweight")
+    .get(controller.getWeight);
+
 router.route("/updatepat")
     .put(controller.putpat);
 /*
