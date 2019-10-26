@@ -20,18 +20,26 @@ exports.all = (req, res, next) => {
 exports.post = (req, res, next) => {
     const patient = req.body;
     const saltRounds = 10;
+    const w= req.headers;
     exports.sendEmail(req);
     const daatee= new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
-    patient["weight"]= {'value': patient["weight"],'date': daatee};
     bcrypt.genSalt(saltRounds, function(err, salt) {
     bcrypt.hash(patient["password"], salt, function(err, hash) {
             patient["password"] = hash;
             new Patient(patient).save(err=>{
                console.log(err);
             });
+            console.log("fechas "+daatee);
+            Patient.updateOne({ '_id': id }, {$push:{'weight':{'value': w["weight"],'date': daatee}}}, function (err, patient) {
+            if(err){
+                console.log(err);
+            }
+            console.log(patient)
+        });
             res.json(patient);
      });
     });
+    
 };
 //Recibe un JSON con el id del doctor, devuelve JSONs con los pacientes asociados a este
 exports.findpatients = (req, res, next) => { 
