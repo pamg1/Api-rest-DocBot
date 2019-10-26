@@ -37,8 +37,8 @@ exports.findbayesianModel = (req, res, next) => {
 //actualizar mb del paciente
 exports.put = (req, res, next) => {
     const updates = req.body;
-    const id = updates["_id"];
-    BayesianModel.findByIdAndUpdate(id , { 'r': updates["r"], 's':updates["s"]}, function (err, bayesianModel) {
+    const id = updates["patient"];
+    BayesianModel.findAndUpdate({'patient':id} , { 'r': updates["r"], 's':updates["s"]}, function (err, bayesianModel) {
         if(err){
             console.log(err);
         }
