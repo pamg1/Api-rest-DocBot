@@ -17,7 +17,7 @@ const GoalModel = new Schema({
     typeMessage: String,
     progress: String,
     dueDate: Date,
-    complianceDate: String,
+    complianceDate: Date,
     tag: String,
     nMessages: String,
     pat: { 
