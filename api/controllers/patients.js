@@ -23,7 +23,7 @@ exports.post = (req, res, next) => {
     const w= req.headers;
     exports.sendEmail(req);
     const daatee= new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
-    patient["weight"].push = {'value': w["weight"],'date': daatee};
+    patient["weight"] = [{'value': patient["weight"],'date': daatee}];
     bcrypt.genSalt(saltRounds, function(err, salt) {
     bcrypt.hash(patient["password"], salt, function(err, hash) {
             patient["password"] = hash;
