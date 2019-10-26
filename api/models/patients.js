@@ -18,12 +18,10 @@ const PatientModel = new Schema({
     height: String,
     email: String,
     password: String,
-    clinicalContext: String,
     dateAssociation: { 
         type: Date,
         default: Date.now
     },
-    medicalCenter: String,
     doc: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Doctor'

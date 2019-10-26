@@ -50,7 +50,7 @@ exports.findmedicalinfo = (req, res, next) => {
 exports.put = (req, res, next) => { 
     const user2 = req.body;
     const id= user2["_id"];
-    MedicalInfo.updateOne({ '_id': id },{'isDiabetic': id['isDiabetic']})
+    MedicalInfo.updateOne({ '_id': id },{'isDiabetic': id['isDiabetic'], 'testFindRisk': id['testFindRisk']})
     .then( medicalInfos => {
         res.json(medicalInfos);
     })
