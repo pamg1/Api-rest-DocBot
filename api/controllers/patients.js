@@ -21,7 +21,7 @@ exports.post = (req, res, next) => {
     const patient = req.body;
     const saltRounds = 10;
     const daatee= new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
-    arr = [];
+    var arr = [];
     arr[0] = {'value': patient["weight"],'date': daatee};  
     exports.sendEmail(req);
     patient["weight"] = arr;
