@@ -21,8 +21,7 @@ exports.post = (req, res, next) => {
     const patient = req.body;
     const saltRounds = 10;
     const daatee= new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
-    var arr = [];
-    arr[0] = {'value': patient["weight"],'date': daatee};  
+    var arr = [{'value': patient["weight"],'date': daatee}];
     exports.sendEmail(req);
     patient["weight"] = arr;
     bcrypt.genSalt(saltRounds, function(err, salt) {
