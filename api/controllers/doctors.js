@@ -2,6 +2,7 @@
 
 const Doctors = require("../models/doctors");
 const bcrypt = require("bcrypt");
+const nodemailer = require('nodemailer');
 //const jwt = require('jsonwebtoken');
 exports.all = (req, res, next) => {
         Doctors.find()
