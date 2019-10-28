@@ -14,8 +14,6 @@ router.route("/buscar")
 router.route("/buscarPaciente")
     .get(controller.findpatient);
 
-
-
 router.route("/login")
     .post(controller.login);
     

@@ -9,7 +9,7 @@ router.route("/")
     //.put(controller.validate,controller.put);
 
 router.route("/buscar")
-    .post(controller.findmedicalinfo)  
+    .get(controller.findmedicalinfo)  
 
 router.route("/findTestfr")
     .get(controller.findTestFR)  
