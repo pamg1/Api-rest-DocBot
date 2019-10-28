@@ -29,17 +29,17 @@ exports.post = (req, res, next) => {
             patient["password"] = hash;
             new Patient(patient).save(err=>{
                console.log(err);
-            });
-            Patient.findOne({'documentNumber': patient["documentNumber"]}, function(err, user){
-                if(user=! null){
-                    console.log({'id':user.id});
-                    res.json({'id':user.id});
-                }else{
-                    console.log(err);
-                }
-            });
-            
+            });            
      });
+    });
+    console.log(patient["documentNumber"])
+    Patient.findOne({'documentNumber': patient["documentNumber"]}, function(err, user){
+        if(user =! null){
+            console.log({'id':user._id});
+            res.json({'id':user._id});
+        }else{
+            console.log(err);
+        }
     });
 };
 //Recibe un JSON con el id del doctor, devuelve JSONs con los pacientes asociados a este
