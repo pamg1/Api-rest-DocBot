@@ -14,6 +14,7 @@ exports.all = (req, res, next) => {
 //Recibe un JSON con toda la info de la y lo guarda en la bd
 exports.post = (req, res, next) => {
     const medicalInfo = req.body;
+    console.log(medicalInfo);
     new MedicalInfo(medicalInfo).save(err=>{
        console.log(err);
     });
@@ -37,12 +38,20 @@ exports.findTestFR = (req, res, next) => {
 exports.findmedicalinfo = (req, res, next) => { 
     const user2 = req.headers;
     const patient= user2['patient'];
-    MedicalInfo.find({ 'patient': patient })
-    .then( medicalInfos => {
-        res.json(medicalInfos);
-    })
-    .catch( err => {
-        next(new Error(err));
+    MedicalInfo.findOne({ 'patient': patient },['clinicalContext', 'testFindRisk', 'medicalCenter',
+        'isDiabetic'], function(err, med){
+        if(med == null){
+            res.json({"medicalinfo": "not found"})
+        }else{
+            res.json({
+                "_id": med.id,
+                "clinicalContext": med.clinicalContext,
+                "testFindRisk": med.testFindRisk,
+                "medicalCenter": med.medicalCenter,
+                "isDiabetic": med.isDiabetic
+            });
+        }
+
     });
   
 };
