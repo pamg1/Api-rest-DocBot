@@ -38,7 +38,7 @@ exports.post = (req, res, next) => {
 //
 exports.findpatient= (req, res) => {
     const patient= req.headers;
-    const dn= patient["documentNumber"];
+    const dn= patient['documentNumber'];
     console.log(dn);
     Patient.findOne({'documentNumber':dn},['name'], function(err, user){
         console.log(user);
