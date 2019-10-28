@@ -38,14 +38,13 @@ exports.post = (req, res, next) => {
 //
 exports.findpatient= (req, res, next) => {
     const patient= req.headers;
-    const dn= patient['documentNumber'];
+    const dn= patient['documentnumber'];
     console.log(dn);
     Patient.findOne({'documentNumber':dn},['name'], function(err, user){
         console.log(user);
         if(user == null){
-            res.json({"post": "no"})
+            res.json({"Patient": "not found"})
             console.log(err);
-            
         }else{
             console.log({"id" : user._id , "name" : user.name});
             res.json({
