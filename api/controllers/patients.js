@@ -44,7 +44,7 @@ exports.findpatient= (req, res) => {
         console.log(user);
         if(user =! null){
             console.log({"id" : user.id, "name" : user.name});
-            res.json({"id" : user.id});
+            res.json(user);
         }else{
             res.json({"post": "no"})
             console.log(err);
