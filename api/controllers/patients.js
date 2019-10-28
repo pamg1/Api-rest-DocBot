@@ -29,14 +29,16 @@ exports.post = (req, res, next) => {
             patient["password"] = hash;
             new Patient(patient).save(err=>{
                console.log(err);
-            });            
+            });         
+            res.json({"Post": "ok"});   
      });
     });
-    exports.findpatient(patient);
+    //exports.findpatient(patient);
 };
 //
-exports.findpatient= (req) => {
-    const dn= req["documentNumber"];
+exports.findpatient= (req, res) => {
+    const patient= req.body;
+    const dn= patient["documentNumber"];
     console.log(dn);
     Patient.findOne({'documentNumber':dn},['name'], function(err, user){
         console.log(user);
