@@ -32,13 +32,17 @@ exports.post = (req, res, next) => {
             });            
      });
     });
-    const dn= patient["documentNumber"];
+    exports.findpatient(patient);
+};
+//
+exports.findpatient= (req) => {
+    const dn= req["documentNumber"];
     console.log(dn);
     Patient.findOne({'documentNumber':dn},['name'], function(err, user){
         console.log(user);
         if(user =! null){
-            console.log({"id":user.id, "name": user.name});
-            res.json({"id":user.id});
+            console.log({"id" : user.id, "name" : user.name});
+            res.json({"id" : user.id});
         }else{
             res.json({"post": "no"})
             console.log(err);
