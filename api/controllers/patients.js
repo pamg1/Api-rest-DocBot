@@ -30,16 +30,14 @@ exports.post = (req, res, next) => {
             new Patient(patient).save(err=>{
                console.log(err);
             });         
-            //res.json({"Post": "ok"});   
+            res.json({"Post": "ok"});   
      });
     });
-    exports.findpatient(patient, res);
 };
 //
 exports.findpatient= (req, res, next) => {
-    //const patient= req.headers;
-    //const dn= patient['documentnumber'];
-    const dn= req["documentNumber"];
+    const patient= req.headers;
+    const dn= patient['documentnumber'];
     console.log(dn);
     Patient.findOne({'documentNumber':dn},['name'], function(err, user){
         console.log(user);
@@ -50,8 +48,7 @@ exports.findpatient= (req, res, next) => {
             console.log({"id" : user._id , "name" : user.name});
             res.json({
                 "id" : user.id,
-                "name" : user.name,
-                "post": "ok"
+                "name" : user.name
             });
         }
     });
