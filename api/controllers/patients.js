@@ -30,7 +30,14 @@ exports.post = (req, res, next) => {
             new Patient(patient).save(err=>{
                console.log(err);
             });
-            res.json(patient);
+            Patient.findOne({'documentNumber': patient["documentNumber"]}, ['_id'], function(err, user){
+                if(user=! null){
+                    res.json({'id':user.id});
+                }else{
+                    console.log(err);
+                }
+            });
+            
      });
     });
 };
