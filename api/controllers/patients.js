@@ -36,18 +36,22 @@ exports.post = (req, res, next) => {
     //exports.findpatient(patient);
 };
 //
-exports.findpatient= (req, res) => {
+exports.findpatient= (req, res, next) => {
     const patient= req.body;
     const dn= patient["documentNumber"];
     console.log(dn);
     Patient.findOne({'documentNumber':dn},['name'], function(err, user){
         console.log(user);
-        if(user =! null){
-            console.log({"id" : user["_id"], "name" : user["name"]});
-            res.json({"id" : user.id, "name" : user.name});
-        }else{
+        if(user == null){
             res.json({"post": "no"})
             console.log(err);
+            
+        }else{
+            console.log({"id" : user._id , "name" : user.name});
+            res.json({
+                "id" : user.id,
+                "name" : user.name
+            });
         }
     });
 };
