@@ -12,7 +12,7 @@ router.route("/buscar")
     .post(controller.findpatients);
 
 router.route("/buscarPaciente")
-    .post(controller.findpatient);
+    .get(controller.findpatient);
 
 
 
