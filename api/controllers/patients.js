@@ -34,7 +34,8 @@ exports.post = (req, res, next) => {
     });
     const dn= patient["documentNumber"];
     console.log(dn);
-    Patient.findOne({"documentNumber":dn},['name'], function(err, user){
+    Patient.findOne({'documentNumber':dn},['name'], function(err, user){
+        console.log(user);
         if(user =! null){
             console.log({"id":user.id, "name": user.name});
             res.json({"id":user.id});
@@ -160,7 +161,7 @@ exports.sendEmail = (req) => {
     const mailOptions = {
         from: 'docbotadmon@gmail.com', // sender address
         to: patient["email"], // list of receivers
-        subject: 'Bienvenido a DocBot', // Subject line
+        subject: 'BIENVENIDO A DOCBOT', // Subject line
         html: '<h2>Bienvenido a DocBot!</h2><p>'+patient["name"]+', su cuenta ha sido creada exitosamente<br/><b>Nombre de usuario: </b>'+patient["documentNumber"]+'<br/><b>Contraseña: </b>'+patient["password"]+'<br/><br/></p>'// plain text body
     };
     console.log(patient["email"]);
