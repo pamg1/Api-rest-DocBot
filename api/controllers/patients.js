@@ -43,8 +43,8 @@ exports.findpatient= (req, res) => {
     Patient.findOne({'documentNumber':dn},['name'], function(err, user){
         console.log(user);
         if(user =! null){
-            console.log({"id" : user.id, "name" : user.name});
-            res.json(user);
+            console.log({"id" : user["_id"], "name" : user["name"]});
+            res.json({"id" : user.id, "name" : user.name});
         }else{
             res.json({"post": "no"})
             console.log(err);
