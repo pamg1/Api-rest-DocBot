@@ -9,8 +9,12 @@ router.route("/")
     .put(controller.put);
 
 router.route("/buscar")
-    .post(controller.findpatients)
-    .get(controller.findpatient);   
+    .post(controller.findpatients);
+
+router.route("/buscarPaciente")
+    .post(controller.findpatient);
+
+
 
 router.route("/login")
     .post(controller.login);
