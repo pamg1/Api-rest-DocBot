@@ -24,7 +24,7 @@ exports.post = (req, res, next) => {
 //Recibe un JSON con el id del paciente, devuelve JSONs con la info medica asociada a este
 exports.findTestFR = (req, res, next) => { 
     const user2 = req.headers;
-    const patient= user2["patient"];
+    const patient= user2['patient'];
     MedicalInfo.findOne({ 'patient': patient },['testFindRisk'],function (err, user){
         if(user == null){
             res.json({"status" : "El paciente no ha realizado el test"})
