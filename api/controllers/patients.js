@@ -33,7 +33,7 @@ exports.post = (req, res, next) => {
      });
     });
     console.log(patient["documentNumber"])
-    Patient.findOne({'documentNumber': patient["documentNumber"]}, function(err, user){
+    Patient.findOne(patient["documentNumber"], function(err, user){
         if(user =! null){
             console.log({'id':user._id});
             res.json({'id':user._id});
