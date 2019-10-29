@@ -25,6 +25,7 @@ exports.post = (req, res, next) => {
 exports.findTestFR = (req, res, next) => { 
     const user2 = req.headers;
     const patient= user2['patient'];
+    console.log(patient);
     MedicalInfo.findOne({ 'patient': patient },['testFindRisk'],function (err, user){
         if(user == null){
             res.json({"status" : "El paciente no ha realizado el test"})
@@ -38,6 +39,7 @@ exports.findTestFR = (req, res, next) => {
 exports.findmedicalinfo = (req, res, next) => { 
     const user2 = req.headers;
     const patient= user2['patient'];
+    console.log("patient: "+ patient);
     MedicalInfo.findOne({ 'patient': patient },['clinicalContext', 'testFindRisk', 'medicalCenter',
         'isDiabetic'], function(err, med){
         if(med == null){
@@ -59,6 +61,7 @@ exports.findmedicalinfo = (req, res, next) => {
 exports.put = (req, res, next) => { 
     const user2 = req.body;
     const id= user2["patient"];
+    console.log(user2);
     MedicalInfo.updateOne({ 'patient': id },{'isDiabetic': id['isDiabetic'], 'testFindRisk': id['testFindRisk']})
     .then( medicalInfos => {
         res.json(medicalInfos);
