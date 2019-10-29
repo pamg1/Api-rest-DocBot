@@ -58,8 +58,8 @@ exports.findmedicalinfo = (req, res, next) => {
 //Recibe un JSON con el id del paciente, devuelve JSONs con la info medica asociada a este
 exports.put = (req, res, next) => { 
     const user2 = req.body;
-    const id= user2["_id"];
-    MedicalInfo.updateOne({ '_id': id },{'isDiabetic': id['isDiabetic'], 'testFindRisk': id['testFindRisk']})
+    const id= user2["patient"];
+    MedicalInfo.updateOne({ 'patient': id },{'isDiabetic': id['isDiabetic'], 'testFindRisk': id['testFindRisk']})
     .then( medicalInfos => {
         res.json(medicalInfos);
     })
