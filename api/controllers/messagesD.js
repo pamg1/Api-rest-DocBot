@@ -47,3 +47,13 @@ exports.findmessagesbypat = (req, res, next) => {
     });
   
 };
+//Recibe el id del mensaje y lo borra
+exports.delete = (req, res, next) => {
+    const message = req.body;
+    const id = message["id"];
+    MessageD.deleteOne({'_id': id}, function(err){
+        console.log(err);
+    });
+    res.json({"delete": "ok"});
+
+}

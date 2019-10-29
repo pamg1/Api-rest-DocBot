@@ -7,6 +7,7 @@ router.route("/")
     .get(controller.all)
     .post(controller.post);
     //.put(controller.put);
+    //.delete(controller.delete);
 
 router.route("/findByDocandP")
     .get(controller.findmessagesbydoc);
