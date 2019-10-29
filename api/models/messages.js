@@ -5,7 +5,9 @@ const Schema = mongoose.Schema;
 
 const MessageModel = new Schema({
     description: String,
-    typeMessage: String,
+    typeMessage: String,//Amable - asertivo
+    classMessage: String, //GenericoInicio- GenericoFinal 
+    isQorA: String, // Pregunta - RespuestaPositiva - RespuestaNegativa
     goals: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'goal'
