@@ -23,8 +23,8 @@ router.use("/appointments", appointmentsRoutes);
 const messagesRoutes = require("./routes/messages");
 router.use("/messages", messagesRoutes);
 
-const messagesHistoriesRoutes = require("./routes/messagesHistories");
-router.use("/messagesHistories", messagesHistoriesRoutes);
+const messagesDRoutes = require("./routes/messagesD");
+router.use("/messagesD", messagesDRoutes);
 
 const medicalInfosRoutes = require("./routes/medicalInfos");
 router.use("/medicalInfos", medicalInfosRoutes);
