@@ -24,7 +24,7 @@ exports.post = (req, res, next) => {
 exports.findmessagesbydoc = (req, res, next) => { 
     const user2 = req.headers;
     const doctor= user2['doctor'];
-    const doctor= user2['patient'];
+    const patient= user2['patient'];
     MessageD.find({ 'doctor': doctor, 'patient': patient })
     .then( messages => {
         res.json(messages);
