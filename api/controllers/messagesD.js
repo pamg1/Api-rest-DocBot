@@ -14,7 +14,7 @@ exports.all = (req, res, next) => {
 //Recibe un JSON con toda la info del mensaje y lo guarda en la bd
 exports.post = (req, res, next) => {
     const message = req.body;
-    new MessageHistory(message).save(err=>{
+    new MessageD(message).save(err=>{
        console.log(err);
     });
     res.json(message);
@@ -24,7 +24,8 @@ exports.post = (req, res, next) => {
 exports.findmessagesbydoc = (req, res, next) => { 
     const user2 = req.headers;
     const doctor= user2['doctor'];
-    MessageD.find({ 'doctor': doctor })
+    const doctor= user2['patient'];
+    MessageD.find({ 'doctor': doctor, 'patient': patient })
     .then( messages => {
         res.json(messages);
     })

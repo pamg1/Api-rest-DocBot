@@ -8,7 +8,7 @@ router.route("/")
     .post(controller.post);
     //.put(controller.put);
 
-router.route("/findByDoc")
+router.route("/findByDocandP")
     .get(controller.findmessagesbydoc);
     
 router.route("/findByPat")
