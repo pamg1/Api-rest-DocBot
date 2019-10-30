@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const MessageDModel = new Schema({
+    subject: String,
     description: String,
     date: String,
     patient: { 
