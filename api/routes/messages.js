@@ -12,6 +12,6 @@ router.route("/buscar")
     .post(controller.findmessages); 
 
 router.route("/lego")
-    .post(controller.legomessages);
+    .get(controller.legomessages);
 
 module.exports = router;
