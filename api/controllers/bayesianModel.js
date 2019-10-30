@@ -17,7 +17,7 @@ exports.post = (req, res, next) => {
     new BayesianModel(bayesianModel).save(err=>{
        console.log(err);
     });
-    res.json(bayesianModel);
+    res.json({"bayesianmodel": "ok"});
     
 };
 //Recibe un JSON con el id del paciente, devuelve JSONs con los modelos bayesianos asociados a este
