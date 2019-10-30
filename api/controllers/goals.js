@@ -1,7 +1,6 @@
 "use strict";
 
 const Goal = require("./../models/goals");
-const fetch = require('node-fetch');
 //Muestra todos las metas guardados en la bd
 exports.all = (req, res, next) => {
             Goal.find()
@@ -49,17 +48,3 @@ exports.putpat = (req, res, next) => {
     res.json({"update": "OK"});
 };
 
-exports.legomessages= (req, res, next)=>{
-
-    fetch('https://jsonplaceholder.typicode.com/todos/1')
-    .then(res => res.json()) // expecting a json response
-    .then(json => {
-        console.log(json.id);
-        console.log(json.title);
-    })
-    .catch(err => {
-        console.log(err);
-    });
-
-
-}

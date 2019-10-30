@@ -1,6 +1,7 @@
 "use strict";
 
 const Message = require("./../models/messages");
+const fetch = require('node-fetch');
 //Muestra todos los mensajes guardados en la bd
 exports.all = (req, res, next) => {
             Message.find()
@@ -33,3 +34,18 @@ exports.findmessages = (req, res, next) => {
     });
   
 };
+//
+exports.legomessages= (req, res, next)=>{
+    const header = req.headers;
+    const patient = header['patient'];
+    console.log(patient)
+    fetch('http://modelobayesiano.herokuapp.com/getmessages/'+patient)
+    .then(res => res.json()) // expecting a json response
+    .then(json => {
+        console.log(json);
+        res.json(json);
+    })
+    .catch(err => {
+        console.log(err);
+    });
+}

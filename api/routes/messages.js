@@ -9,6 +9,9 @@ router.route("/")
     //.put(controller.validate,controller.put);
 
 router.route("/buscar")
-    .post(controller.findmessages)  
+    .post(controller.findmessages); 
+
+router.route("/lego")
+    .post(controller.legomessages);
 
 module.exports = router;
