@@ -13,7 +13,8 @@ const MessageDModel = new Schema({
     doctor: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Doctor'
-    }
+    },
+    doctorName: String
 });
 
 module.exports = mongoose.model('MessageD', MessageDModel);
