@@ -7,11 +7,7 @@ const MessageModel = new Schema({
     description: String,
     typeMessage: String,//Amable - asertivo
     classMessage: String, //GenericoInicio- GenericoFinal 
-    isQorA: String, // Pregunta - RespuestaPositiva - RespuestaNegativa
-    goals: { 
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'goal'
-    }
+    isQorA: String // Pregunta - RespuestaPositiva - RespuestaNegativa
 });
 
 module.exports = mongoose.model('Message', MessageModel);

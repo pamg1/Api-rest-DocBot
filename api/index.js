@@ -1,6 +1,7 @@
 "use strict";
 
 const router = require("express").Router();
+var cors = require('cors')
 
 const patientsRoutes = require("./routes/patients");
 router.use("/patients", patientsRoutes);
