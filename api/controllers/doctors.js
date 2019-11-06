@@ -3,7 +3,17 @@
 const Doctors = require("../models/doctors");
 const bcrypt = require("bcrypt");
 const nodemailer = require('nodemailer');
+const crypto = require('crypto');
 //const jwt = require('jsonwebtoken');
+
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+           user: 'docbotadmon@gmail.com',
+           pass: 'f5J~w5Q]=1JDj'
+    }
+});
+
 exports.all = (req, res, next) => {
         Doctors.find()
             .then( doctors => {
@@ -52,22 +62,61 @@ exports.login = (req, res, next) => {
         }
     });
 };
-
-exports.sendEmail = (req) => {
-    const doctor = req.body;
-    // create reusable transporter object using the default SMTP transport
-    var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-               user: 'docbotadmon@gmail.com',
-               pass: 'f5J~w5Q]=1JDj'
+// create reusable transporter object using the default SMTP transport
+exports.changepassword = (req, res) => {
+    const dooctor= req.headers;
+    const email= dooctor['email'];
+    var token = crypto.randomBytes(5).toString('hex');
+    Doctors.findOne({'email': email },['name','lastName', 'email'], function(err, doctor){
+        if(doctor == null){
+            res.json({"change": "no ok"});
+        }else{
+            exports.sendEmailToken(doctor, token);
+            res.json({"token": token});
         }
     });
+};
+
+exports.putpassword = (req) => {
+    const updates = req.headers;
+    const email = updates['email'];
+    console.log(updates);
+    bcrypt.genSalt(10, function(err, salt){
+        bcrypt.hash(updates['newpassword'], salt, function(err,hash){
+            updates['newpassword'] = hash;
+        });
+    });
+    Doctor.updateOne({ 'email': email }, {'password': updates["newpassword"]}, function (err, doctor) {
+        if(err){
+            console.log("Error: "+ err);
+        }
+    });
+    res.json({"update": "OK"});
+}
+
+exports.sendEmail = (req) => {
+    const doctor = req.body;    
     const mailOptions = {
         from: 'docbotadmon@gmail.com', // sender address
         to: doctor["email"], // list of receivers
         subject: 'Bienvenido a DocBot', // Subject line
-        html: '<h2>Bienvenido a DocBot!</h2><p>'+doctor["name"]+', su cuenta ha sido creada exitosamente<br/><b>Nombre de usuario: </b>'+doctor["email"]+'<br/><b>Contraseña: </b>'+doctor["password"]+'</p>'// plain text body
+        html: '<h2>Bienvenido a DocBot!</h2><p>'+doctor["name"]+', su cuenta ha sido creada exitosamente<br/><br/><b>Nombre de usuario: </b>'+doctor["email"]+'<br/><b>Contraseña: </b>'+doctor["password"]+'</p>'// plain text body
+    };
+    console.log(doctor["email"]);
+    transporter.sendMail(mailOptions, function (err, info) {
+        if(err)
+          console.log(err)
+        else
+          console.log(info);
+    });
+}
+
+exports.sendEmailToken = (doctor, token) => {
+    const mailOptions = {
+        from: 'docbotadmon@gmail.com', // sender address
+        to: doctor["email"], // list of receivers
+        subject: 'Cambiar contraseña', // Subject line
+        html: '<h2>Hola, '+doctor["name"]+'!</h2><p> Recientemente se ha solicitado cambiar la contraseña para su cuenta DOCBOT. Para realizar el cambio de contraseña debe ingresar el siguiente código de verificación <br/><br/><b>Código: </b>'+token+'<br/><br/>Si no ha sido usted, puede ignorar este correo. Su contraseña no cambiará, a menos que usted cree una nueva.</p>'// plain text body
     };
     console.log(doctor["email"]);
     transporter.sendMail(mailOptions, function (err, info) {

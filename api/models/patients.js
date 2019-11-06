@@ -20,7 +20,7 @@ const PatientModel = new Schema({
     password: String,
     dateAssociation: { 
         type: Date,
-        default: Date.now
+        default: new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')
     },
     doc: { 
         type: mongoose.Schema.Types.ObjectId, 
