@@ -95,12 +95,13 @@ exports.putpassword = (req, res) => {
     const updates = req.headers;
     const email = updates['email'];
     console.log(updates);
+    var nw;
     bcrypt.genSalt(10, function(err, salt){
         bcrypt.hash(updates['newpassword'], salt, function(err,hash){
-            updates['newpassword'] = hash;
+            nw = hash;
         });
     });
-    Doctor.updateOne({ 'email': email }, {'password': updates["newpassword"]}, function (err, doctor) {
+    Doctors.updateOne({ 'email': email }, {'password': nw}, function (err, doctor) {
         if(err){
             console.log("Error: "+ err);
         }
