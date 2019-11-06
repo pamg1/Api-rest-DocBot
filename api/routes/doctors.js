@@ -12,6 +12,9 @@ router.route("/login")
     .post(controller.login);
 
 router.route("/changepass")
-    .get(controller.changepassword);
+    .put(controller.putpassword);
+
+router.route("/codever")
+    .get(controller.codever);
 
 module.exports = router;

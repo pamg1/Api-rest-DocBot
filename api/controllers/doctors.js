@@ -63,10 +63,12 @@ exports.login = (req, res, next) => {
     });
 };
 // create reusable transporter object using the default SMTP transport
-exports.changepassword = (req, res) => {
+exports.codever = (req, res) => {
     const dooctor= req.headers;
     const email= dooctor['email'];
     var token = crypto.randomBytes(5).toString('hex');
+    console.log(dooctor);
+    console.log(token);
     Doctors.findOne({'email': email },['name','lastName', 'email'], function(err, doctor){
         if(doctor == null){
             res.json({"change": "no ok"});
@@ -77,7 +79,19 @@ exports.changepassword = (req, res) => {
     });
 };
 
-exports.putpassword = (req) => {
+exports.putdoctor = (req, res) => {
+    const updates = req.headers;
+    const id = updates['id'];
+    console.log(updates);
+    Doctor.updateOne({ '_id': id }, {'name': updates["name"]}, function (err, doctor) {
+        if(err){
+            console.log("Error: "+ err);
+        }
+    });
+    res.json({"update": "OK"});
+}
+
+exports.putpassword = (req, res) => {
     const updates = req.headers;
     const email = updates['email'];
     console.log(updates);
