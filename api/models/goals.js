@@ -11,10 +11,8 @@ const GoalModel = new Schema({
         default: Date.now
     },
     quantity:String,
-    typeFrequency: String,
     frequency: String,
     intensityLevel: String,
-    typeMessage: String,
     progress: String,
     dueDate: Date,
     complianceDate: String,

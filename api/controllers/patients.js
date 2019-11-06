@@ -170,7 +170,7 @@ exports.sendEmail = (req) => {
         from: 'docbotadmon@gmail.com', // sender address
         to: patient["email"], // list of receivers
         subject: 'BIENVENIDO A DOCBOT', // Subject line
-        html: '<h2>Bienvenido a DocBot!</h2><p>'+patient["name"]+', su cuenta ha sido creada exitosamente<br/><b>Nombre de usuario: </b>'+patient["documentNumber"]+'<br/><b>Contraseña: </b>'+patient["password"]+'<br/><br/></p>'// plain text body
+        html: '<h2>Bienvenido a DocBot!</h2><p>'+patient["name"]+', su cuenta ha sido creada exitosamente<br/><b>Nombre de usuario: </b>'+patient["documentNumber"]+'<br/><b>Contraseña: </b>'+patient["password"]+'<br/><br/>Cordialmente, <br/> <img src="/resources/Logo3.jpg" width="200" height="100"><br/> <i>"Sistema de acompañamiento para pacientes con<i><br/><i>Diabetes tipo 2 y síndrome metabólico"<i><br/><strong>Universidad del norte - 2019</strong></p>'// plain text body
     };
     console.log(patient["email"]);
     transporter.sendMail(mailOptions, function (err, info) {
