@@ -25,11 +25,11 @@ exports.doc = (req, res, next) => {
         worksheet.cell(1,5).string('id_Paciente').style(style);
         for (var i = 0; i < paraclinicals.length; i++) {
             const paraclinical = paraclinicals[i];
-            worksheet.cell(i,1).string(paraclinical["date"]).style(style);
-            worksheet.cell(i,2).string(paraclinical["type"]).style(style);
-            worksheet.cell(i,3).string(paraclinical["value"]).style(style);
-            worksheet.cell(i,4).string(paraclinical["comment"]).style(style);
-            worksheet.cell(i,5).string(paraclinical["patient"]).style(style);
+            worksheet.cell(i,1).string(''+paraclinical["date"]).style(style);
+            worksheet.cell(i,2).string(''+paraclinical["type"]).style(style);
+            worksheet.cell(i,3).string(''+paraclinical["value"]).style(style);
+            worksheet.cell(i,4).string(''+paraclinical["comment"]).style(style);
+            worksheet.cell(i,5).string(''+paraclinical["patient"]).style(style);
         }
         workbook.write('Paclinicos.xlsx');
         res.json(paraclinicals);
