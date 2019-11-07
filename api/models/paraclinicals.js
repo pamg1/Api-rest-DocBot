@@ -1,6 +1,7 @@
 "use strict";
 
 const mongoose = require("mongoose");
+var moment = require('moment');
 const Schema = mongoose.Schema;
 
 const ParaclinicalModel = new Schema({
@@ -15,7 +16,7 @@ const ParaclinicalModel = new Schema({
     },
     date: { 
         type: Date,
-        default: new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')
+        default: moment(new Date()).format('MM DD YYYY h:mm:ss a')
     }
 });
 
