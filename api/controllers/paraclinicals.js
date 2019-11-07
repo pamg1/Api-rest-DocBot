@@ -32,7 +32,7 @@ exports.doc = (req, res, next) => {
             worksheet.cell(i,5).string(''+paraclinical["patient"]).style(style);
         }
         workbook.write('Paclinicos.xlsx');
-        res.json(paraclinicals);
+        res.Workbook;
     })
     .catch( err => {
         next(new Error(err));
