@@ -48,3 +48,18 @@ exports.putpat = (req, res, next) => {
     res.json({"update": "OK"});
 };
 
+//actualizar datos de la meta
+exports.putpd = (req, res, next) => {
+    const updates = req.body;
+    const id = updates["id"];
+    console.log(updates);
+    Goal.updateOne({ '_id': id }, {'description': updates["description"],
+     'dueDate':updates["dueDate"], 'quantity': updates["quantity"],
+     'frequency': updates["frequency"]}, function (err, patient) {
+        if(err){
+            console.log(err);
+        }
+    });
+    res.json({"update": "OK"});
+};
+
