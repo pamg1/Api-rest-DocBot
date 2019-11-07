@@ -11,4 +11,7 @@ router.route("/")
 router.route("/buscar")
     .post(controller.findgoals)  
 
+router.route("/putgoal")
+    .put(controller.putpd)  
+
 module.exports = router;
