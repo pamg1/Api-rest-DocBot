@@ -1,7 +1,7 @@
 "use strict";
 
 const router = require("express").Router();
-const controller = require("../controllers/goalsHistories");
+const controller = require("../controllers/goalps");
 
 router.route("/")
     .get(controller.all)
@@ -9,6 +9,6 @@ router.route("/")
     //.put(controller.validate,controller.put);
 
 router.route("/buscar")
-    .post(controller.findgoalsHistories)  
+    //.post(controller.findgoalsHistories)  
 
 module.exports = router;

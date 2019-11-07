@@ -12,14 +12,8 @@ router.use("/doctors", doctorsRoutes);
 const goalsRoutes = require("./routes/goals");
 router.use("/goals", goalsRoutes);
 
-const goalsHistoriesRoutes = require("./routes/goalsHistories");
-router.use("/goalsHistories", goalsHistoriesRoutes);
-
-const answersRoutes = require("./routes/answers");
-router.use("/answers", answersRoutes);
-
-const appointmentsRoutes = require("./routes/appointments");
-router.use("/appointments", appointmentsRoutes);
+const goalpsRoutes = require("./routes/goalps");
+router.use("/goalps", goalpsRoutes);
 
 const messagesRoutes = require("./routes/messages");
 router.use("/messages", messagesRoutes);
