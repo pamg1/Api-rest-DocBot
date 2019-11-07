@@ -23,7 +23,7 @@ exports.doc = (req, res, next) => {
         worksheet.cell(1,3).string('Valor').style(style);
         worksheet.cell(1,4).string('Comentario').style(style);
         worksheet.cell(1,5).string('id_Paciente').style(style);
-        for (i = 0; i < paraclinicals.length; i++) {
+        for (var i = 0; i < paraclinicals.length; i++) {
             const paraclinical = paraclinicals[i];
             worksheet.cell(i,1).string(paraclinical["date"]).style(style);
             worksheet.cell(i,2).string(paraclinical["type"]).style(style);
