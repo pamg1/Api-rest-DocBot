@@ -12,4 +12,7 @@ router.route("/buscar")
     .get(controller.findparaclinicals)
     .post(controller.findparaclinicalsbypandt);
 
+router.route("/document")
+    .get(controller.doc);
+
 module.exports = router;
