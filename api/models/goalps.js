@@ -7,4 +7,4 @@ const GoalpModel = new Schema({
     description: String
 });
 
-module.exports = mongoose.model('Goalp', GoalHistorieModel);
+module.exports = mongoose.model('Goalp', GoalpModel);
