@@ -12,23 +12,7 @@ const MedicalInfoModel = new Schema({
     patient: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Patient'
-    }/*,
-    goals:  { 
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'goals'
-    },
-    goalsHistories: { 
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'goalshistories'
-    },
-    paclinicals: { 
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'paraclinicals'
-    },
-    appointments: { 
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'appoinments'
-    }*/
+    }
 });
 
 module.exports = mongoose.model('MedicalInfo', MedicalInfoModel);

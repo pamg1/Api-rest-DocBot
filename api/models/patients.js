@@ -13,15 +13,12 @@ const PatientModel = new Schema({
     sex: String,
     weight: [{ 
         value: Number, 
-        date: Date
+        date: String
     }],
     height: String,
     email: String,
     password: String,
-    dateAssociation: { 
-        type: Date,
-        default: new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')
-    },
+    dateAssociation: String,
     doc: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Doctor'

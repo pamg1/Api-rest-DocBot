@@ -14,10 +14,7 @@ const ParaclinicalModel = new Schema({
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Patient'
     },
-    date: { 
-        type: Date,
-        default: moment(new Date()).format('MM DD YYYY h:mm:ss a')
-    }
+    date: String
 });
 
 module.exports = mongoose.model('Paraclinical', ParaclinicalModel);

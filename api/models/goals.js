@@ -6,15 +6,12 @@ const Schema = mongoose.Schema;
 const GoalModel = new Schema({
     description: String,
     state: String,
-    creationDate: { 
-        type: Date,
-        default: Date.now
-    },
+    creationDate: String, 
     quantity:String,
     frequency: String,
     intensityLevel: String,
     progress: String,
-    dueDate: Date,
+    dueDate: String,
     complianceDate: String,
     tag: String,
     nMessages: String,

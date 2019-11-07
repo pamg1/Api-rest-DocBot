@@ -60,7 +60,7 @@ exports.post = (req, res, next) => {
 //Recibe el id de un paciente, devuelve JSONs con los paraclinicos asociados a este
 exports.findparaclinicals = (req, res, next) => { 
     const user2 = req.headers;
-    const patient= user2['content-type'];
+    const patient= user2['patient'];
     Paraclinical.find({ 'patient': patient })
     .then( paraclinicals => {
         res.json(paraclinicals);

@@ -20,7 +20,7 @@ exports.all = (req, res, next) => {
 exports.post = (req, res, next) => {
     const patient = req.body;
     const saltRounds = 10;
-    const daatee= new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
+    const daatee= patient["dateAssociation"];
     exports.sendEmail(req);
     patient["weight"] = {'value': patient["weight"], 'date': daatee };
     console.log(patient);
@@ -132,8 +132,7 @@ exports.putweight = (req, res, next) => {
     const updates = req.body;
     const id = updates["id"];
     console.log(updates);
-    const daatee= new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
-    console.log("fechas "+daatee);
+    const daatee= updates["date"];
     Patient.updateOne({ '_id': id }, {$push:{'weight':{'value': updates["weight"],'date': daatee}}}, function (err, patient) {
         if(err){
             console.log(err);
