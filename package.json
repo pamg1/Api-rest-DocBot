@@ -13,6 +13,7 @@
     "excel4node": "^1.7.2",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.24.0",
     "mongoose": "^5.5.7",
     "node-fetch": "^2.6.0",
     "nodemailer": "^6.3.1"
