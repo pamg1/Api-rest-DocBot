@@ -63,3 +63,16 @@ exports.putpd = (req, res, next) => {
     res.json({"update": "OK"});
 };
 
+//delete goal
+exports.delete = (req, res, next) => {
+    const goal = req.headers;
+    const id= goal["id"];
+    console.log(goal);
+    Goal.deleteOne({'_id': id }, function (err) {
+        if(err){
+            console.log(err)
+        }
+        res.json({"delete":"ok"});
+    });
+};
+
