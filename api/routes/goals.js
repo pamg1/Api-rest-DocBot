@@ -15,6 +15,6 @@ router.route("/putgoal")
     .put(controller.putpd) 
     
 router.route("/delete")
-    .put(controller.delete) 
+    .delete(controller.delete) 
 
 module.exports = router;
