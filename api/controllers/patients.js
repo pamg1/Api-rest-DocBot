@@ -121,7 +121,7 @@ exports.putpat = (req, res, next) => {
     console.log(updates);
     Patient.updateOne({ '_id': id }, {'name': updates["name"],
      'lastName':updates["lastName"], 'age': updates["age"],
-     'height':updates["height"],'avatar':updates["avatar"], 'steps': updates["steps"]}, function (err, patient) {
+     'height':updates["height"],'avatar':updates["avatar"], 'steps': updates["steps"], 'email': updates["email"]}, function (err, patient) {
         if(err){
             console.log("Error: "+err);
         }
