@@ -72,7 +72,7 @@ exports.login = (req, res, next) => {
     const email = user2["documentNumber"];
     const password = user2["password"];
     Patient.findOne({ 'documentNumber': email }, ['name','lastName','age','weight','height','medicalCenter','password',
-     'avatar', 'sex', 'email'] , function (err, user) {
+     'avatar', 'sex', 'email', 'steps'] , function (err, user) {
         if(user==null){
             res.json({"login": false});
         }else{
@@ -88,7 +88,8 @@ exports.login = (req, res, next) => {
                     "medicalCenter" : user.medicalCenter,
                     "avatar": user.avatar,
                     "sex": user.sex,
-                    "email": user.email
+                    "email": user.email,
+                    "steps": user.steps
                 });
                 }else{
                     res.json({"login" : false})
@@ -120,7 +121,7 @@ exports.putpat = (req, res, next) => {
     console.log(updates);
     Patient.updateOne({ '_id': id }, {'name': updates["name"],
      'lastName':updates["lastName"], 'age': updates["age"],
-     'height':updates["height"],'avatar':updates["avatar"]}, function (err, patient) {
+     'height':updates["height"],'avatar':updates["avatar"], 'steps': updates["steps"]}, function (err, patient) {
         if(err){
             console.log("Error: "+err);
         }
