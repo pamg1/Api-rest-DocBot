@@ -24,7 +24,7 @@ const PatientModel = new Schema({
         ref: 'Doctor'
     },
     avatar: String,
-    img: { data: Buffer, contentType: String }
+    steps: Number
 });
 
 module.exports = mongoose.model('Patient', PatientModel);
