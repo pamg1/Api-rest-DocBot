@@ -50,7 +50,7 @@ exports.findmedicalinfo = (req, res, next) => {
     const patient= user2['patient'];
     console.log("patient: "+ patient);
     MedicalInfo.findOne({ 'patient': patient },['clinicalContext', 'testFindRisk', 'medicalCenter',
-        'isDiabetic'], function(err, med){
+        'isDiabetic','weight'], function(err, med){
         if(med == null){
             res.json({"medicalinfo": "not found"})
         }else{
