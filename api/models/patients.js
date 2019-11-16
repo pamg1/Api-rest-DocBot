@@ -11,20 +11,19 @@ const PatientModel = new Schema({
     documentType: String,
     documentNumber: String,
     sex: String,
-    weight: [{ 
-        value: Number, 
-        date: String
-    }],
-    height: String,
     email: String,
     password: String,
     dateAssociation: String,
+    avatar: String,
+    steps: String,
+    civilStatus: String,
+    socioeconomic: String,
+    educationLevel: String,
+    smoking: Boolean,
     doc: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Doctor'
-    },
-    avatar: String,
-    steps: String
+    }
 });
 
 module.exports = mongoose.model('Patient', PatientModel);

@@ -13,4 +13,11 @@ router.route("/buscar")
 
 router.route("/findTestfr")
     .get(controller.findTestFR);  
+
+router.route("/updateweight")
+    .put(controller.putweight);
+
+router.route("/getweight")
+    .get(controller.getWeight);
+
 module.exports = router;

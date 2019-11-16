@@ -1,7 +1,9 @@
 "use strict";
 
 const MedicalInfo = require("./../models/medicalInfos");
-//Muestra todos las informaciones medicas guardados en la bd
+/**
+ * Muestra todos las informaciones medicas guardados en la bd
+ */
 exports.all = (req, res, next) => {
             MedicalInfo.find()
             .then( medicalInfos => {
@@ -11,7 +13,9 @@ exports.all = (req, res, next) => {
                 next(new Error(err));
             });
 };
-//Recibe un JSON con toda la info de la y lo guarda en la bd
+/**
+ * Recibe un JSON con toda la info de la y lo guarda en la bd
+ */
 exports.post = (req, res, next) => {
     const medicalInfo = req.body;
     console.log(medicalInfo);
@@ -21,7 +25,9 @@ exports.post = (req, res, next) => {
     res.json(medicalInfo);
     
 };
-//Recibe un JSON con el id del paciente, devuelve JSONs con la info medica asociada a este
+/**
+ * Recibe un JSON con el id del paciente, devuelve JSONs con la info medica asociada a este
+ */
 exports.findTestFR = (req, res, next) => { 
     const user2 = req.headers;
     const patient= user2['patient'];
@@ -35,7 +41,9 @@ exports.findTestFR = (req, res, next) => {
         }
     });
 };
-//Recibe un JSON con el id del paciente, devuelve JSONs con la info medica asociada a este
+/**
+ * Recibe el id del paciente, devuelve JSON con la info medica asociada a este
+ */
 exports.findmedicalinfo = (req, res, next) => { 
     const user2 = req.headers;
     const patient= user2['patient'];
@@ -57,12 +65,15 @@ exports.findmedicalinfo = (req, res, next) => {
     });
   
 };
-//Recibe un JSON con el id del paciente, devuelve JSONs con la info medica asociada a este
+/**
+ * Recibe un JSON con los datos a actualizar
+ */
 exports.put = (req, res, next) => { 
     const user2 = req.body;
     const id= user2["patient"];
     console.log(user2);
-    MedicalInfo.updateOne({ 'patient': id },{'isDiabetic': id['isDiabetic'], 'testFindRisk': id['testFindRisk']})
+    MedicalInfo.updateOne({ 'patient': id },{'isDiabetic': id['isDiabetic'], 'testFindRisk': id['testFindRisk'], 'height': id['height'],
+    'imc': id['imc']})
     .then( medicalInfos => {
         res.json(medicalInfos);
     })
@@ -70,4 +81,34 @@ exports.put = (req, res, next) => {
         ext(new Error(err));n
     });
   
+};
+/**
+ * Actualizar datos del paciente
+ */
+exports.putweight = (req, res, next) => {
+    const updates = req.body;
+    const id = updates["id"];
+    console.log(updates);
+    const daatee= updates["date"];
+    MedicalInfo.updateOne({ 'patient': id }, {$push:{'weight':{'value': updates["weight"],'date': daatee}}}, function (err, patient) {
+        if(err){
+            console.log(err);
+        }
+        console.log(patient)
+    });
+    res.json({"update": "OK"});
+};
+/**
+ * Recibe un JSON con el id del doctor, devuelve JSONs con los pacientes asociados a este
+ */
+exports.getWeight = (req, res, next) => { 
+    const user2 = req.headers;
+    const id= user2["id"];
+    MedicalInfo.findOne({ 'patient': id },['weight'],function (err, user) {
+        if(user==null){
+            res.json({"weight":"no asociado a paciente"});
+        }else{
+            res.json({"weight":user.weight});
+        }
+    });
 };
