@@ -87,19 +87,18 @@ exports.post = (req, res, next) => {
     // your app. Expo does not control this policy and sends back the feedback from
     // Apple and Google so you can handle it appropriately.
     let receiptIds = [];
-    for (let ticket of tickets) {
     // NOTE: Not all tickets have IDs; for example, tickets for notifications
     // that could not be enqueued will have error information and no receipt ID.
     if (ticket.id) {
         receiptIds.push(ticket.id);
     }
-    }
+    
 
-    let receiptIdChunks = expo.chunkPushNotificationReceiptIds(receiptIds);
+    let chunk = expo.chunkPushNotificationReceiptIds(receiptIds);
     (async () => {
     // Like sending notifications, there are different strategies you could use
     // to retrieve batches of receipts from the Expo service.
-    for (let chunk of receiptIdChunks) {
+    
         try {
         let receipts = await expo.getPushNotificationReceiptsAsync(chunk);
         console.log(receipts);
@@ -122,7 +121,6 @@ exports.post = (req, res, next) => {
         } catch (error) {
         console.error(error);
         }
-    }
     })();
 
     res.json(message);
