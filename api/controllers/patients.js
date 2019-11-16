@@ -88,7 +88,7 @@ exports.login = (req, res, next) => {
         }else{
             bcrypt.compare(password, user.password, function(err, resu) {
                 if(resu==true){
-                    MedicalInfo.findOne({'_id': user.id},['weight', 'height'],function(err, med){
+                    MedicalInfo.findOne({'patient': user.id},['weight', 'height'],function(err, med){
                         res.json({"login" : true,
                         "id": user.id,
                         "name" : user.name,
@@ -101,8 +101,8 @@ exports.login = (req, res, next) => {
                         "sex": user.sex,
                         "email": user.email,
                         "steps": user.steps
+                        });
                     });
-                });
                 }else{
                     res.json({"login" : false})
                 }
