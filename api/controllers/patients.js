@@ -88,18 +88,20 @@ exports.login = (req, res, next) => {
         }else{
             bcrypt.compare(password, user.password, function(err, resu) {
                 if(resu==true){
-                    res.json({"login" : true,
-                    "id": user.id,
-                    "name" : user.name,
-                    "lastName" : user.lastName,
-                    "age": user.age,
-                    "weight":user.weight,
-                    "height":user.height,
-                    "medicalCenter" : user.medicalCenter,
-                    "avatar": user.avatar,
-                    "sex": user.sex,
-                    "email": user.email,
-                    "steps": user.steps
+                    MedicalInfo.findOne({'_id': user.id},['weight', 'height'],function(err, med){
+                        res.json({"login" : true,
+                        "id": user.id,
+                        "name" : user.name,
+                        "lastName" : user.lastName,
+                        "age": user.age,
+                        "medicalCenter" : user.medicalCenter,
+                        "weight": med.weight,
+                        "height" : med.height,
+                        "avatar": user.avatar,
+                        "sex": user.sex,
+                        "email": user.email,
+                        "steps": user.steps
+                    });
                 });
                 }else{
                     res.json({"login" : false})
@@ -285,20 +287,21 @@ exports.exportFile = (req, res, next) => {
         { header: 'Fecha', key: 'date' }
     ]
     for(var i=0; i < ids.length; i++){
-        Patient.findOne({'_id': ids[i]} , function (err, user) {
+        Patient.findOne({'_id': ids[i]}, ['name', 'lastName', 'birthdate', 'age', 'documentType', 'documentNumber', 'sex','email',
+        'doc', 'civilStatus', 'socioeconimic', 'educationLevel', 'smoking'], function (err, user) {
             const pesos = user.weight;
             sheet1.addRow({id: user.id, fullname: user.name +' '+user.lastName, birthdate: user.birthdate, age: user.age,
             documentType: user.documentType, documentNumber: user.documentNumber, sex: user.sex, email:user.email,
             doc: user.doc, statusc: user.civilStatus, socioeconomic: user.socioeconomic,educaLevel: user.educationLevel,
-            smoking: user.smoking });
-            for(var j=0; j < pesos.length; j++){
-                sheet3.addRow({id: user.id, value: pesos[i].value, date: pesos[j].date,});
-            }        
+            smoking: user.smoking });       
         });
-        MedicalInfo.findOne({'patient': ids[i]}, function(err, infom){
+        MedicalInfo.findOne({'patient': ids[i]},['patient', 'clinicalContext', 'testFind'], function(err, infom){
             sheet2.addRow({idPat: infom.patient, clinicalContext: infom.clinicalContext , testFindRisk: infom.testFindRisk,
             medicalCenter: infom.medicalCenter, isDiabetic:infom.isDiabetic , abdominalperimeter: infom.abdominalperimeter,
             imc: infom.imc, height: infom.height});
+            for(var j=0; j < pesos.length; j++){
+                sheet3.addRow({id: user.id, value: pesos[i].value, date: pesos[j].date,});
+            } 
         });
         Goals.findOne({'patient': ids[i], 'state': "2"},function(err,goal){
             sheet4.addRow({idP: ids[i], creationDate: goal.creationDate, dueDate: goal.dueDate, complianceDate: goal.complianceDate,
