@@ -10,11 +10,14 @@ const GoalModel = new Schema({
     quantity:String,
     frequency: String,
     intensityLevel: String,
-    progress: String,
     dueDate: String,
     complianceDate: String,
     tag: String,
     nMessages: String,
+    progress: [{ 
+        value: Number, 
+        date: String
+    }],
     pat: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Patient'

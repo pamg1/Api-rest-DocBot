@@ -1,26 +1,33 @@
 "use strict";
 
 const Goal = require("./../models/goals");
-//Muestra todos las metas guardados en la bd
+/**
+ * Muestra todos las metas guardados en la bd
+ */
 exports.all = (req, res, next) => {
-            Goal.find()
-            .then( goals => {
-                res.json(goals);
-            })
-            .catch( err => {
-                next(new Error(err));
-            });
+    Goal.find()
+    .then( goals => {
+        res.json(goals);
+    })
+    .catch( err => {
+        next(new Error(err));
+    });
 };
-//Recibe un JSON con toda la info de la meta y lo guarda en la bd
+/**
+ * Recibe un JSON con toda la info de la meta y lo guarda en la bd
+ */
 exports.post = (req, res, next) => {
     const goal = req.body;
+    goal["progress"] = {'value': goal["progress"], 'date': goal["date"] };
     new Goal(goal).save(err=>{
        console.log(err);
     });
     res.json(goal);
     
 };
-//Recibe un JSON con el id del paciente, devuelve JSONs con las metas asociados a este
+/**
+ * Recibe un JSON con el id del paciente, devuelve JSONs con las metas asociados a este
+ */
 exports.findgoals = (req, res, next) => { 
     const user2 = req.body;
     const patient= user2["pat"];
@@ -33,14 +40,16 @@ exports.findgoals = (req, res, next) => {
     });
   
 };
-//actualizar datos de la meta
+/**
+ * Actualizar datos de la meta
+ */
 exports.putpat = (req, res, next) => {
     const updates = req.body;
     const id = updates["id"];
     console.log(updates);
-    Goal.updateOne({ '_id': id }, {'progress': updates["progress"],
-     'state':updates["state"], 'nMessages': updates["nMessages"],
-     'complianceDate': updates["complianceDate"]}, function (err, patient) {
+    Goal.updateOne({ '_id': id }, {$push:{'progress':{'value': updates["progress"],'date':updates["date"]}},
+    'state':updates["state"], 'nMessages': updates["nMessages"],
+    'complianceDate': updates["complianceDate"]}, function (err, patient) {
         if(err){
             console.log(err);
         }
@@ -48,7 +57,9 @@ exports.putpat = (req, res, next) => {
     res.json({"update": "OK"});
 };
 
-//actualizar datos de la meta
+/**
+ * Actualizar datos de la meta
+ */
 exports.putpd = (req, res, next) => {
     const updates = req.body;
     const id = updates["id"];
@@ -63,7 +74,9 @@ exports.putpd = (req, res, next) => {
     res.json({"update": "OK"});
 };
 
-//delete goal
+/**
+ * Borrar meta
+ */
 exports.delete = (req, res, next) => {
     const goal = req.headers;
     const id= goal["id"];
@@ -73,6 +86,37 @@ exports.delete = (req, res, next) => {
             console.log(err)
         }
         res.json({"delete":"ok"});
+    });
+};
+
+/**
+ * Actualizar progreso de la meta del paciente
+ */
+exports.putprogress = (req, res, next) => {
+    const updates = req.body;
+    const id = updates["id"];
+    console.log(updates);
+    const daatee= updates["date"];
+    Goal.updateOne({ '_id': id }, {$push:{'progress':{'value': updates["progress"],'date': daatee}}}, function (err, goal) {
+        if(err){
+            console.log(err);
+        }
+        console.log(goal)
+    });
+    res.json({"update": "OK"});
+};
+/**
+ * Recibe el id de la meta y nueva, devuelve JSON asociados a este
+ */
+exports.getprogress = (req, res, next) => { 
+    const user2 = req.headers;
+    const id= user2["id"];
+    Goal.findOne({ '_id': id },['progress'],function (err, user) {
+        if(user==null){
+            res.json({"progress":"no asociado a meta"});
+        }else{
+            res.json({"progress":user.progress});
+        }
     });
 };
 
