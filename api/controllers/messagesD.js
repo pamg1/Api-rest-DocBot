@@ -31,9 +31,8 @@ exports.post = (req, res, next) => {
     let expo = new Expo();
 
     // Create the messages that you want to send to clents
-    let somePushTokens = patient;
+    let pushToken = patient;
     let messages = [];
-    for (let pushToken of somePushTokens) {
         // Each push token looks like ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]
         // Check that all your push tokens appear to be valid Expo push tokens
         if (!Expo.isExpoPushToken(pushToken)) {
@@ -48,7 +47,7 @@ exports.post = (req, res, next) => {
         body: 'Que rico too eso :v',
         data: { withSome: 'data' },
         }) 
-    }
+    
     // The Expo push notification service accepts batches of notifications so
     // that you don't need to send 1000 requests to send 1000 notifications. We
     // recommend you batch your notifications to reduce the number of requests
