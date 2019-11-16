@@ -100,12 +100,12 @@ exports.post = (req, res, next) => {
     // to retrieve batches of receipts from the Expo service.
     
         try {
-        let receipts = await expo.getPushNotificationReceiptsAsync(chunk);
-        console.log(receipts);
+        let receipt = await expo.getPushNotificationReceiptsAsync(chunk);
+        console.log(receipt);
 
         // The receipts specify whether Apple or Google successfully received the
         // notification and information about an error, if one occurred.
-        for (let receipt of receipts) {
+        
             if (receipt.status === 'ok') {
             continue;
             } else if (receipt.status === 'error') {
@@ -117,7 +117,6 @@ exports.post = (req, res, next) => {
                 console.error(`The error code is ${receipt.details.error}`);
             }
             }
-        }
         } catch (error) {
         console.error(error);
         }
