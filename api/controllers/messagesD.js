@@ -1,6 +1,7 @@
 "use strict";
 
 const MessageD = require("../models/messagesD");
+const Patient = require("../models/patients");
 const { Expo } = require('expo-server-sdk');
 /**
  * Muestra todos los mensajes guardados en la bd
@@ -19,13 +20,18 @@ exports.all = (req, res, next) => {
  */
 exports.post = (req, res, next) => {
     const message = req.body;
+    const patient;
     new MessageD(message).save(err=>{
         console.log(err);
+    });
+    Patient.findOne({ '_id': message['patient'] }, ['token'] , function (err, user){
+        patient= user; 
     });
     // Create a new Expo SDK client
     let expo = new Expo();
 
     // Create the messages that you want to send to clents
+    let somePushTokens = patient.token;
     let messages = [];
     for (let pushToken of somePushTokens) {
         // Each push token looks like ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]
@@ -39,7 +45,7 @@ exports.post = (req, res, next) => {
         messages.push({
         to: pushToken,
         sound: 'default',
-        body: 'This is a test notification',
+        body: 'Que rico too eso :v',
         data: { withSome: 'data' },
         }) 
     }
