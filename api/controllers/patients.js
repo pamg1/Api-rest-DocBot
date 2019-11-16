@@ -289,26 +289,28 @@ exports.exportFile = (req, res, next) => {
     for(var i=0; i < ids.length; i++){
         Patient.findOne({'_id': ids[i]}, ['name', 'lastName', 'birthdate', 'age', 'documentType', 'documentNumber', 'sex','email',
         'doc', 'civilStatus', 'socioeconimic', 'educationLevel', 'smoking'], function (err, user) {
-            const pesos = user.weight;
             sheet1.addRow({id: user.id, fullname: user.name +' '+user.lastName, birthdate: user.birthdate, age: user.age,
             documentType: user.documentType, documentNumber: user.documentNumber, sex: user.sex, email:user.email,
             doc: user.doc, statusc: user.civilStatus, socioeconomic: user.socioeconomic,educaLevel: user.educationLevel,
             smoking: user.smoking });       
         });
-        MedicalInfo.findOne({'patient': ids[i]},['patient', 'clinicalContext', 'testFind'], function(err, infom){
+        MedicalInfo.findOne({'patient': ids[i]},['patient', 'clinicalContext', 'testFindRisk','medicalCenter','isDiabetic',
+        'abdominalperimeter','imc','height','weight'], function(err, infom){
             sheet2.addRow({idPat: infom.patient, clinicalContext: infom.clinicalContext , testFindRisk: infom.testFindRisk,
             medicalCenter: infom.medicalCenter, isDiabetic:infom.isDiabetic , abdominalperimeter: infom.abdominalperimeter,
             imc: infom.imc, height: infom.height});
+            const pesos = infom.weight;
             for(var j=0; j < pesos.length; j++){
                 sheet3.addRow({id: user.id, value: pesos[i].value, date: pesos[j].date,});
             } 
         });
-        Goals.findOne({'patient': ids[i], 'state': "2"},function(err,goal){
+        Goals.findOne({'patient': ids[i], 'state': "2"},['creationDate','dueDate','complianceDate','description','quantity',
+            'quantityType','frequency','state','progress', 'nMessages'],function(err,goal){
             sheet4.addRow({idP: ids[i], creationDate: goal.creationDate, dueDate: goal.dueDate, complianceDate: goal.complianceDate,
             description: goal.description, quantity: goal.quantity, quantityType: '', frequency: goal.frequency, state:goal.state,
             progress: goal.progress, nMessages: goal.nMessages }); 
         });
-        Paraclinical.findOne({},function(err,pc){
+        Paraclinical.findOne({'patient': ids[i]}, ['date', 'type', 'value', 'comment'],function(err,pc){
             sheet5.addRow({idP: ids[i], date: pc.date, type: pc.type, value: pc.value, comment: pc.comment});
         });
         // Save Excel on Hard Disk
