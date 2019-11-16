@@ -59,7 +59,8 @@ exports.findmedicalinfo = (req, res, next) => {
                 "clinicalContext": med.clinicalContext,
                 "testFindRisk": med.testFindRisk,
                 "medicalCenter": med.medicalCenter,
-                "isDiabetic": med.isDiabetic
+                "isDiabetic": med.isDiabetic,
+                "weight": med.weight
             });
         }
 
