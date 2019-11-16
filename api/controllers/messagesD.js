@@ -25,13 +25,13 @@ exports.post = (req, res, next) => {
         console.log(err);
     });
     Patient.findOne({ '_id': message['patient'] }, ['token'] , function (err, user){
-        patient= user; 
+        patient= user.token; 
     });
     // Create a new Expo SDK client
     let expo = new Expo();
 
     // Create the messages that you want to send to clents
-    let somePushTokens = patient.token;
+    let somePushTokens = patient;
     let messages = [];
     for (let pushToken of somePushTokens) {
         // Each push token looks like ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]
