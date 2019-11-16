@@ -28,7 +28,6 @@ exports.post = (req, res, next) => {
     const saltRounds = 10;
     const daatee= patient["dateAssociation"];
     exports.sendEmail(req);
-    patient["weight"] = {'value': patient["weight"], 'date': daatee };
     console.log(patient);
     bcrypt.genSalt(saltRounds, function(err, salt) {
     bcrypt.hash(patient["password"], salt, function(err, hash) {
