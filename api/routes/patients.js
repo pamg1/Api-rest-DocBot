@@ -28,6 +28,9 @@ router.route("/updatepat")
 
 router.route("/document")
     .get(controller.exportFile);
+
+router.route("/token")
+    .put(controller.putoken);
 /*
 router.route("/:email")
     .get(controller.validate,controller.get);

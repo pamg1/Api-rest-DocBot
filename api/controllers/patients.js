@@ -318,6 +318,19 @@ exports.exportFile = (req, res, next) => {
         });
     }
 };
+/**
+ * Actualizar token
+ */
+exports.putoken = (req, res) => {
+    const update = req.json;
+    const id = update['id'];
+    Patient.findOneAndUpdate({'_id': id}, {'token': update['token']}, function(err, user){
+        if(err){
+            console.log("Error: "+err);
+        }
+    });
+    res.json({"update": "ok"});
+};
 
 /*
 exports.validate = (req, res, next) => {

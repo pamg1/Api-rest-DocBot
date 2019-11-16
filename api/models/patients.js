@@ -20,6 +20,7 @@ const PatientModel = new Schema({
     socioeconomic: String,
     educationLevel: String,
     smoking: Boolean,
+    token: String,
     doc: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Doctor'
