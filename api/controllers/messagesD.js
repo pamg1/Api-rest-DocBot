@@ -20,7 +20,7 @@ exports.all = (req, res, next) => {
  */
 exports.post = (req, res, next) => {
     const message = req.body;
-    const patient;
+    var patient;
     new MessageD(message).save(err=>{
         console.log(err);
     });
