@@ -37,7 +37,7 @@ exports.post = (req, res, next) => {
     // Check that all your push tokens appear to be valid Expo push tokens
     if (!Expo.isExpoPushToken(pushToken)) {
         console.error(`Push token ${pushToken} is not a valid Expo push token`);
-        continue;
+        return;
     }
 
     // Construct a message (see https://docs.expo.io/versions/latest/guides/push-notifications.html)
@@ -54,7 +54,7 @@ exports.post = (req, res, next) => {
     // and to compress them (notifications with similar content will get
     // compressed).
     let chunk = expo.chunkPushNotifications(messages);
-    let tickets = [];
+    let tickets;
     (async () => {
     // Send the chunks to the Expo push notification service. There are
     // different strategies you could use. A simple one is to send one chunk at a
