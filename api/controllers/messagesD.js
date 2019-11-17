@@ -30,6 +30,7 @@ exports.post = (req, res, next) => {
             console.log(err);
         }else{
             patient= user["token"]; 
+            console.log(patient);
         }
     });
     // Create a new Expo SDK client
