@@ -24,7 +24,7 @@ exports.post = (req, res, next) => {
     new MessageD(message).save(err=>{
         console.log(err);
     });
-    console.log(message);
+    console.log(message["patient"]);
     Patient.findOne({ '_id': message["patient"] }, ['token'] , function (err, user){
         if(user==null){
             console.log(err);
