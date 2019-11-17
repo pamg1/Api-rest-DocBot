@@ -342,6 +342,7 @@ exports.exportFile = (req, res, next) => {
         // Success Message
         alert("File Saved");
     });
+    res.send(workbook.xlsx);
 };
 /**
  * Actualizar token
