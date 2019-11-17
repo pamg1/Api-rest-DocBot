@@ -107,7 +107,7 @@ exports.post = (req, res, next) => {
         // notification and information about an error, if one occurred.
         
             if (receipt.status === 'ok') {
-            continue;
+            return;
             } else if (receipt.status === 'error') {
             console.error(`There was an error sending a notification: ${receipt.message}`);
             if (receipt.details && receipt.details.error) {
