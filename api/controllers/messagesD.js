@@ -94,7 +94,7 @@ exports.post = (req, res, next) => {
     }
     
 
-    let chunk = expo.chunkPushNotificationReceiptIds(receiptIds);
+    chunk = expo.chunkPushNotificationReceiptIds(receiptIds);
     (async () => {
     // Like sending notifications, there are different strategies you could use
     // to retrieve batches of receipts from the Expo service.
