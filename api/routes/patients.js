@@ -27,7 +27,7 @@ router.route("/updatepat")
     .put(controller.putpat);
 
 router.route("/document")
-    .get(controller.exportFile);
+    .post(controller.exportFile);
 
 router.route("/token")
     .put(controller.putoken);

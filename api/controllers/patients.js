@@ -199,8 +199,8 @@ exports.delete = (req, res, next) => {
  * Exportar datos de los pacientes selecionados
  */
 exports.exportFile = (req, res, next) => {
-    const headrs = req.headers;
-    const ids = headrs['ids'];
+    const ids = req.body;
+   // const ids = headrs['ids'];
     console.log(ids);
     console.log(ids[0]);
     console.log(ids[0].id);
