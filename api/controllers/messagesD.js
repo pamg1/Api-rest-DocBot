@@ -26,10 +26,11 @@ exports.post = (req, res, next) => {
     });
     console.log(message["patient"]);
     Patient.findOne({ '_id': message["patient"] }, ['token'] , function (err, user){
+        console.log(user);
         if(user==null){
             console.log(err);
         }else{
-            patient= user["token"]; 
+            patient= user.token; 
             console.log(patient);
         }
     });
