@@ -31,12 +31,9 @@ exports.post = (req, res, next) => {
             console.log(err);
         }else{
             patient= user['token']; 
-            console.log("dff"+patient);
-        }
-    });
-    // Create a new Expo SDK client
+            // Create a new Expo SDK client
     let expo = new Expo();
-    console.log(user['token']);
+    console.log(patient);
     // Create the messages that you want to send to clents
     let pushToken = patient;
     let messages = [];
@@ -105,7 +102,6 @@ exports.post = (req, res, next) => {
     (async () => {
     // Like sending notifications, there are different strategies you could use
     // to retrieve batches of receipts from the Expo service.
-    
         try {
         let receipt = await expo.getPushNotificationReceiptsAsync(chunk);
         console.log(receipt);
@@ -128,7 +124,9 @@ exports.post = (req, res, next) => {
         console.error(error);
         }
     })();
-
+        }
+    });
+    
     res.json(message);
 
 };
