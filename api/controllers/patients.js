@@ -202,7 +202,7 @@ exports.exportFile = (req, res, next) => {
     const headrs = req.headers;
     const ids = headrs['ids'];
     console.log(ids);
-    console.log(ids[0]);
+    console.log(ids['id']);
     // A new Excel Work Book
     var workbook = new Excel.Workbook();
     // Some information about the Excel Work Book.
@@ -288,7 +288,7 @@ exports.exportFile = (req, res, next) => {
         { header: 'Valor', key: 'value' },
         { header: 'Fecha', key: 'date' }
     ]
-    for(var id in ids){
+    for (var id in ids){
         Patient.findOne({'_id': id}, ['name', 'lastName', 'birthdate', 'age', 'documentType', 'documentNumber', 'sex','email',
         'doc', 'civilStatus', 'socioeconimic', 'educationLevel', 'smoking'], function (err, user) {
             if(user == null ){
