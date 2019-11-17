@@ -86,7 +86,7 @@ exports.post = (req, res, next) => {
     // notifications to devices that have blocked notifications or have uninstalled
     // your app. Expo does not control this policy and sends back the feedback from
     // Apple and Google so you can handle it appropriately.
-    let receiptIds = [];
+    let receiptIds;
     // NOTE: Not all tickets have IDs; for example, tickets for notifications
     // that could not be enqueued will have error information and no receipt ID.
     if (ticket.id) {
