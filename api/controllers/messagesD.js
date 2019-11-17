@@ -93,9 +93,9 @@ exports.post = (req, res, next) => {
         let receiptIds;
         // NOTE: Not all tickets have IDs; for example, tickets for notifications
         // that could not be enqueued will have error information and no receipt ID.
-        if (tickets.id) {
-            receiptIds.push(tickets.id);
-        }
+        //if (tickets.id) {
+            //receiptIds.push(tickets.id);
+        //}
         
 
         chunk = expo.chunkPushNotificationReceiptIds(receiptIds);
