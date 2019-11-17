@@ -203,7 +203,7 @@ exports.exportFile = (req, res, next) => {
     const ids = headrs['ids'];
     console.log(ids);
     console.log(ids[0]);
-    console.log(ids[i].id);
+    console.log(ids[0].id);
     // A new Excel Work Book
     var workbook = new Excel.Workbook();
     // Some information about the Excel Work Book.
