@@ -335,13 +335,13 @@ exports.exportFile = (req, res, next) => {
                 sheet5.addRow({idP: ids[i].id, date: pc.date, type: pc.type, value: pc.value, comment: pc.comment});
             }
         });
-        // Save Excel on Hard Disk
-        workbook.xlsx.writeFile("Datos_Pacientes.xlsx")
-        .then(function() {
-            // Success Message
-            alert("File Saved");
-        });
     }
+    // Save Excel on Hard Disk
+    workbook.xlsx.writeFile("Datos_Pacientes.xlsx")
+    .then(function() {
+        // Success Message
+        alert("File Saved");
+    });
 };
 /**
  * Actualizar token
