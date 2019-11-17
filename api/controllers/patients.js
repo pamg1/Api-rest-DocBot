@@ -203,7 +203,7 @@ exports.exportFile = (req, res, next) => {
     const ids = headrs['ids'];
     console.log(ids);
     console.log(ids[0]);
-    console.log(ids[0].id);
+    console.log(ids[i].id);
     // A new Excel Work Book
     var workbook = new Excel.Workbook();
     // Some information about the Excel Work Book.
@@ -289,8 +289,8 @@ exports.exportFile = (req, res, next) => {
         { header: 'Valor', key: 'value' },
         { header: 'Fecha', key: 'date' }
     ]
-    for (var id in ids){
-        Patient.findOne({'_id': id}, ['name', 'lastName', 'birthdate', 'age', 'documentType', 'documentNumber', 'sex','email',
+    for (var i in ids){
+        Patient.findOne({'_id': ids[i].id}, ['name', 'lastName', 'birthdate', 'age', 'documentType', 'documentNumber', 'sex','email',
         'doc', 'civilStatus', 'socioeconimic', 'educationLevel', 'smoking'], function (err, user) {
             if(user == null ){
 
@@ -302,14 +302,15 @@ exports.exportFile = (req, res, next) => {
             }
                 
         });
-        MedicalInfo.findOne({'patient': id},['patient', 'clinicalContext', 'testFindRisk','medicalCenter','isDiabetic',
+        MedicalInfo.findOne({'patient': ids[i].id},['patient', 'clinicalContext', 'testFindRisk','medicalCenter','isDiabetic',
         'abdominalperimeter','imc','height','weight'], function(err, infom){
             
             if(infom== null){
-                sheet2.addRow({idPat: infom.patient, clinicalContext: infom.clinicalContext , testFindRisk: infom.testFindRisk,
-                medicalCenter: infom.medicalCenter, isDiabetic:infom.isDiabetic , abdominalperimeter: infom.abdominalperimeter,
-                imc: infom.imc, height: infom.height});
+                
             }else{
+                sheet2.addRow({idPat: infom.patient, clinicalContext: infom.clinicalContext , testFindRisk: infom.testFindRisk,
+                    medicalCenter: infom.medicalCenter, isDiabetic:infom.isDiabetic , abdominalperimeter: infom.abdominalperimeter,
+                    imc: infom.imc, height: infom.height});
                 const pesos = infom.weight;
                 for(var j=0; j < pesos.length; j++){
                     sheet3.addRow({id: user.id, value: pesos[i].value, date: pesos[j].date,});
@@ -317,21 +318,21 @@ exports.exportFile = (req, res, next) => {
             }
             
         });
-        Goals.findOne({'patient': id, 'state': "2"},['creationDate','dueDate','complianceDate','description','quantity',
+        Goals.findOne({'patient': ids[i].id, 'state': "2"},['creationDate','dueDate','complianceDate','description','quantity',
             'quantityType','frequency','state','progress', 'nMessages'],function(err,goal){
             if(goal == null){
 
             }else{
-                sheet4.addRow({idP: id, creationDate: goal.creationDate, dueDate: goal.dueDate, complianceDate: goal.complianceDate,
+                sheet4.addRow({idP: ids[i].id, creationDate: goal.creationDate, dueDate: goal.dueDate, complianceDate: goal.complianceDate,
                 description: goal.description, quantity: goal.quantity, quantityType: '', frequency: goal.frequency, state:goal.state,
                 progress: goal.progress, nMessages: goal.nMessages }); 
             }
         });
-        Paraclinical.findOne({'patient': id}, ['date', 'type', 'value', 'comment'],function(err,pc){
+        Paraclinical.findOne({'patient': ids[i].id}, ['date', 'type', 'value', 'comment'],function(err,pc){
             if(pc == null){
 
             }else{
-                sheet5.addRow({idP: id, date: pc.date, type: pc.type, value: pc.value, comment: pc.comment});
+                sheet5.addRow({idP: ids[i].id, date: pc.date, type: pc.type, value: pc.value, comment: pc.comment});
             }
         });
         // Save Excel on Hard Disk
