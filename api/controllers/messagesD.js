@@ -25,7 +25,11 @@ exports.post = (req, res, next) => {
         console.log(err);
     });
     Patient.findOne({ '_id': message['patient'] }, ['token'] , function (err, user){
-        patient= user.token; 
+        if(user==null){
+            console.log(err);
+        }else{
+            patient= user["token"]; 
+        }
     });
     // Create a new Expo SDK client
     let expo = new Expo();
