@@ -25,6 +25,7 @@ exports.post = (req, res, next) => {
         console.log(err);
     });
     console.log(message["patient"]);
+    /*
     Patient.findOne({ '_id': message["patient"] }, ['token'] , function (err, user){
         console.log(user);
         if(user==null){
@@ -46,10 +47,10 @@ exports.post = (req, res, next) => {
 
         // Construct a message (see https://docs.expo.io/versions/latest/guides/push-notifications.html)
         messages.push({
-        to: pushToken,
-        sound: 'default',
-        body: 'Que rico too eso :v',
-        data: { withSome: 'data' },
+            to: pushToken,
+            sound: 'default',
+            body: 'Que rico too eso :v',
+            data: { withSome: 'data' },
         });
         
         // The Expo push notification service accepts batches of notifications so
@@ -64,15 +65,15 @@ exports.post = (req, res, next) => {
         // different strategies you could use. A simple one is to send one chunk at a
         // time, which nicely spreads the load out over time:
             try {
-            let ticketChunk = await expo.sendPushNotificationsAsync(chunk);
-            console.log(ticketChunk);
-            tickets.push(...ticketChunk);
-            // NOTE: If a ticket contains an error code in ticket.details.error, you
-            // must handle it appropriately. The error codes are listed in the Expo
-            // documentation:
-            // https://docs.expo.io/versions/latest/guides/push-notifications#response-format
+                let ticketChunk = await expo.sendPushNotificationsAsync(chunk);
+                console.log(ticketChunk);
+                tickets.push(...ticketChunk);
+                // NOTE: If a ticket contains an error code in ticket.details.error, you
+                // must handle it appropriately. The error codes are listed in the Expo
+                // documentation:
+                // https://docs.expo.io/versions/latest/guides/push-notifications#response-format
             } catch (error) {
-            console.error(error);
+                console.error(error);
             }
         })();
         // Later, after the Expo push notification service has delivered the
@@ -93,11 +94,10 @@ exports.post = (req, res, next) => {
         let receiptIds;
         // NOTE: Not all tickets have IDs; for example, tickets for notifications
         // that could not be enqueued will have error information and no receipt ID.
-        //if (tickets.id) {
-            //receiptIds.push(tickets.id);
-        //}
+        if (tickets.id) {
+            receiptIds.push(tickets.id);
+        }
         
-
         chunk = expo.chunkPushNotificationReceiptIds(receiptIds);
         (async () => {
         // Like sending notifications, there are different strategies you could use
@@ -110,7 +110,7 @@ exports.post = (req, res, next) => {
             // notification and information about an error, if one occurred.
             
                 if (receipt.status === 'ok') {
-                return;
+                    return;
                 } else if (receipt.status === 'error') {
                 console.error(`There was an error sending a notification: ${receipt.message}`);
                 if (receipt.details && receipt.details.error) {
@@ -128,7 +128,7 @@ exports.post = (req, res, next) => {
     });
     
     res.json(message);
-
+*/
 };
 /**
  * Recibe un el id del doctor, devuelve JSONs con las mensajes asociados a este
