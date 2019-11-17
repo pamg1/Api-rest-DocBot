@@ -30,7 +30,7 @@ exports.post = (req, res, next) => {
         if(user==null){
             console.log(err);
         }else{
-            patient= user['user']; 
+            patient= user['token']; 
             console.log("dff"+patient);
         }
     });
