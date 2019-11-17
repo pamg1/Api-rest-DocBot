@@ -29,7 +29,7 @@ exports.post = (req, res, next) => {
     });
     // Create a new Expo SDK client
     let expo = new Expo();
-
+    Console.log(patient);
     // Create the messages that you want to send to clents
     let pushToken = patient;
     let messages = [];
