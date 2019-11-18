@@ -78,6 +78,7 @@ exports.findpatients = (req, res, next) => {
  * Login pacientes
  */
 exports.login = (req, res, next) => { 
+
     const user2 = req.body;
     const email = user2["documentNumber"];
     const password = user2["password"];
@@ -212,16 +213,6 @@ exports.exportFile = (req, res, next) => {
     //workbook.created = new Date(2018, 6, 19);
     //workbook.modified = new Date();
     //workbook.lastPrinted = new Date(2016, 9, 27);
-    // Add Worksheets to the workbook
-    // Create a sheet
-    // A new Excel Work Book
-    var workbook = new Excel.Workbook();
-    // Some information about the Excel Work Book.
-    workbook.creator = 'DocBot';
-    //workbook.lastModifiedBy = '';
-    //workbook.created = new Date(2018, 6, 19);
-    //workbook.modified = new Date();
-    //workbook.lastPrinted = new Date(2016, 9, 27);
     // Create a sheet
     var sheet1 = workbook.addWorksheet('Info_Personal_Pacientes');
     var sheet2 = workbook.addWorksheet('Info_Medica_Pacientes');
@@ -283,12 +274,6 @@ exports.exportFile = (req, res, next) => {
         { header: 'Valor', key: 'value' },
         { header: 'Comentario', key: 'comment' }
     ]
-    // A table header pesos
-    sheet3.columns = [
-        { header: 'IdPaciente', key: 'idP' },
-        { header: 'Valor', key: 'value' },
-        { header: 'Fecha', key: 'date' }
-    ]
     for (var i in ids){
         Patient.findOne({'_id': ids[i].id}, ['name', 'lastName', 'birthdate', 'age', 'documentType', 'documentNumber', 'sex','email',
         'doc', 'civilStatus', 'socioeconimic', 'educationLevel', 'smoking'], function (err, user) {
@@ -332,7 +317,7 @@ exports.exportFile = (req, res, next) => {
             if(pc == null){
 
             }else{
-                sheet5.addRow({idP: ids[i].id, date: pc.date, type: pc.type, value: pc.value, comment: pc.comment});
+                    sheet5.addRow({idP: ids[i].id, date: pc.date, type: pc.type, value: pc.value, comment: pc.comment});
             }
         });
     }
@@ -358,6 +343,31 @@ exports.putoken = (req, res, next) => {
     });
     res.json({"update": "ok"});
 };
+
+/**
+ * Exportar datos de los pacientes selecionados
+ */
+exports.exportData = (req,res,next) =>{
+    const headrs = req.body;
+    const ids = headrs['ids'];
+    var patients;
+    console.log(ids);
+    console.log(ids[0]);
+    console.log(ids[0].id);
+    for (var i in ids){
+        Patient.findOne({'_id': ids[i].id}, ['name', 'lastName', 'birthdate', 'age', 'documentType', 'documentNumber', 'sex','email',
+        'doc', 'civilStatus', 'socioeconimic', 'educationLevel', 'smoking'], function (err, user) {
+            if(user == null ){
+
+            }else{
+                console.log(user);
+                console.log(patients);
+                patients.push(user);
+            }    
+        });
+    }
+    res.json(patients);
+}
 
 /*
 exports.validate = (req, res, next) => {

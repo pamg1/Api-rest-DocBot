@@ -29,26 +29,10 @@ router.route("/updatepat")
 router.route("/document")
     .post(controller.exportFile);
 
+router.route("/exportData")
+    .post(controller.exportData);
+
 router.route("/token")
     .put(controller.putoken);
-/*
-router.route("/:email")
-    .get(controller.validate,controller.get);
     
-router.route("/login/:email")
-    .get(controller.email);
-
-
-router.route("/historical/:id")
-    .get(controller.validate,controller.historical)
-    
-router.route("/list/:id")
-    .get(controller.validate,controller.list)
-    .post(controller.validate,controller.addlist)
-    .delete(controller.validate,controller.removelist);
-
-router.route("/list/:id/actual")
-    .get(controller.validate,controller.getlist)
-        
-*/
 module.exports = router;

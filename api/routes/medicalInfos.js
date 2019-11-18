@@ -20,4 +20,7 @@ router.route("/updateweight")
 router.route("/getweight")
     .get(controller.getWeight);
 
+router.route("/exportData")
+    .post(controller.exportData);
+
 module.exports = router;

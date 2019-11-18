@@ -117,3 +117,27 @@ exports.getWeight = (req, res, next) => {
         }
     });
 };
+/**
+ * Exportar datos de los pacientes selecionados
+ */
+exports.exportData = (req,res,next) =>{
+    const headrs = req.body;
+    const ids = headrs['ids'];
+    var medicalsinfos;
+    console.log(ids);
+    console.log(ids[0]);
+    console.log(ids[0].id);
+    for (var i in ids){
+        MedicalInfo.findOne({'patient': ids[i].id},['patient', 'clinicalContext', 'testFindRisk','medicalCenter','isDiabetic',
+        'abdominalperimeter','imc','height','weight'], function(err, infom){
+            if(user == null ){
+
+            }else{
+                console.log(infom);
+                console.log(medicalsinfos);
+                medicalsinfos.push(infom);
+            }    
+        });
+    }
+    res.json(medicalsinfos);
+}
